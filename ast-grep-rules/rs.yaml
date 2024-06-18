@@ -1,0 +1,14 @@
+id: my-rule
+language: rust
+rule:
+  kind: block
+  has:
+    pattern: $COMMENT
+    all:
+      - any:
+        - kind: line_comment
+        - kind: block_comment
+      - any:
+        - regex: "Write your code here"
+        - regex: "Write your logic here"
+
