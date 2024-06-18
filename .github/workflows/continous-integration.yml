@@ -9,15 +9,23 @@ env:
 
 jobs:
   rust_code_formatting:
-    name: Code formatting with fmt - latest commit
+    name: Code formatting with fmt
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: rustup update stable && rustup default stable
       - run: cargo fmt --all -- --check --verbose
 
+  rust_code_linter:
+    name: Code linting with clippy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup update stable && rustup default stable
+      - run: cargo clippy --all-targets --all-features
+
   rust_code_tests:
-    name: Rust build and test - latest commit
+    name: Rust build and test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
