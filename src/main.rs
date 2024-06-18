@@ -29,7 +29,7 @@ fn get_files(path: &str, extension: &str) -> Vec<String> {
 /// get the positions of the comments and block who define the beginning of the part to remove
 fn get_removable_parts(extension: &str, file: &str) -> String {
     let json = run_command(&format!(
-        "ast-grep scan --rule ast-grep-rules/{}.yaml {} --json=stream",
+        "ast-grep scan --rule /etc/jobtrek/sw/ast-grep-rules/{}.yaml {} --json=stream",
         extension, file
     ));
     json
