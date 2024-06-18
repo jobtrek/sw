@@ -21,7 +21,7 @@ SW uses :
 - SW only looks in the src folder
 - respects the .ignore and .gitignore files as [fd](https://github.com/sharkdp/fd) does.
 - Search for these languages (by file extension) :
-  - Rust : `.rust`
+  - Rust : `.rs` (also add the `todo!()` macro to allow compilation)
   - PHP : `.php`
   - JavaScript : `.js`
   - TypeScript : `.ts`
