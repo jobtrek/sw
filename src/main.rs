@@ -8,15 +8,16 @@ fn main() {
         // get all files with the given extension in the path
         let files = run_command(&format!("fd . {} -e {} --type f", path, extension));
         let files = files.split('\n').collect::<Vec<&str>>();
-        let files = files.iter().filter(|&x| !x.is_empty()).collect::<Vec<&&str>>();
+        let files = files
+            .iter()
+            .filter(|&x| !x.is_empty())
+            .collect::<Vec<&&str>>();
         for file in files {
-
             println!("{}", file);
         }
     }
 }
-    println!("Hello, world!");
-}
+// ast-grep scan --rule ast-grep-rules/rust.yaml example/arrays.rs --json=stream
 
 /// run a bash command and return the output
 fn run_command(command: &str) -> String {
@@ -27,4 +28,3 @@ fn run_command(command: &str) -> String {
         .expect("failed to execute process");
     String::from_utf8(output.stdout).unwrap()
 }
-
