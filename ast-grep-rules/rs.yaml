@@ -1,7 +1,10 @@
 id: my-rule
 language: rust
 rule:
-  kind: block
+  any:
+    - kind: block
+    - kind: field_declaration_list
+  pattern: $BLOCK
   has:
     pattern: $COMMENT
     all:
