@@ -33,7 +33,6 @@ structstruck::strike! {
 fn main() {
     let path = "./example";
     let extensions = "rs,php,js,ts,java".split(',').collect::<Vec<&str>>();
-
     for extension in extensions {
         let files = get_files(path, extension);
         for file in files {
@@ -53,9 +52,11 @@ fn remove_parts(file: &str, parts: &[Program], replace_with: &str) -> std::io::R
     let content = std::fs::read_to_string(file)?;
     let mut content = content.lines().collect::<Vec<&str>>();
     for part in parts.iter().rev() {
-        let start = part.meta_variables.single.comment.range.end.line as usize + 1;
-        let end = part.range.end.line as usize - 1;
-        content.splice(start..=end, std::iter::once(replace_with));
+        content.splice(
+            (part.meta_variables.single.comment.range.end.line as usize + 1)
+                ..=(part.range.end.line as usize - 1),
+            std::iter::once(replace_with),
+        );
     }
     std::fs::write(file, content.join("\n"))?;
     Ok(())
