@@ -2,34 +2,29 @@ use serde::{Deserialize, Serialize};
 use std::process::Command;
 
 // structure of the json returned by ast-grep (only the useful parts)
-#[derive(Serialize, Deserialize, Debug)]
-struct Position {
-    line: u16,
-    column: u16,
-}
-#[derive(Serialize, Deserialize, Debug)]
-struct StartEnd {
-    start: Position,
-    end: Position,
-}
-#[derive(Serialize, Deserialize, Debug)]
-struct Comment {
-    text: String,
-    range: StartEnd,
-}
-#[derive(Serialize, Deserialize, Debug)]
-struct Single {
-    COMMENT: Comment,
-}
-#[derive(Serialize, Deserialize, Debug)]
-struct Variable {
-    single: Single,
-}
-#[derive(Serialize, Deserialize, Debug)]
-struct Program {
-    text: String,
-    range: StartEnd,
-    metaVariables: Variable,
+structstruck::strike! {
+    #[strikethrough[derive(Serialize, Deserialize, Debug)]]
+    struct Program {
+        text: String,
+        range: struct {
+            start: struct {
+                line: u16,
+                column: u16,
+            },
+            end: struct {
+                line: u16,
+                column: u16,
+            }
+        },
+        metaVariables: struct {
+            single: struct {
+                COMMENT: struct {
+                    text: String,
+                    range: Range
+                }
+            }
+        }
+    }
 }
 
 fn main() {
@@ -58,7 +53,8 @@ fn get_removable_parts(extension: &str, file: &str) -> Vec<Program> {
     serde_json::from_str(&run_command(&format!(
         "ast-grep scan --rule /etc/jobtrek/sw/ast-grep-rules/{}.yaml {} --json",
         extension, file
-    ))).unwrap()
+    )))
+    .unwrap()
 }
 
 /// run a bash command and return the output
