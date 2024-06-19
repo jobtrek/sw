@@ -37,7 +37,16 @@ fn main() {
     for extension in extensions {
         let files = get_files(path, extension);
         for file in files {
-            println!("{:?}", get_removable_parts(extension, &file));
+            let parsed = get_removable_parts(extension, &file);
+            for part in parsed {
+                println!(
+                    "lines to remove: {}:{}-{}",
+                    file,
+                    part.meta_variables.single.comment.range.end.line + 2,
+                    part.range.end.line
+                );
+            }
+            println!()
         }
     }
 }
