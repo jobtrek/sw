@@ -16,10 +16,13 @@ structstruck::strike! {
                 column: u16,
             }
         },
-        metaVariables: struct {
+        #[serde(rename = "metaVariables")]
+        meta_variables: struct {
             single: struct {
-                COMMENT: struct {
+                #[serde(rename = "COMMENT")]
+                comment: struct {
                     text: String,
+                    // here we can directly refer to the range struct as we allready defined it
                     range: Range
                 }
             }
