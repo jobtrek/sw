@@ -38,17 +38,27 @@ fn main() {
         let files = get_files(path, extension);
         for file in files {
             let parsed = get_removable_parts(extension, &file);
-            for part in parsed {
-                println!(
-                    "lines to remove: {}:{}-{}",
-                    file,
-                    part.meta_variables.single.comment.range.end.line + 2,
-                    part.range.end.line
-                );
+            if parsed.is_empty() {
+                continue;
             }
-            println!()
+            remove_parts(&file, &parsed)
+                .unwrap_or_else(|e| eprintln!("failed to remove parts from {}: {}", file, e));
         }
     }
+}
+
+/// remove the parts of the file that are defined in the given list of programs
+/// parts are removed in reverse order to avoid changing the line numbers of the other parts
+fn remove_parts(file: &str, parts: &[Program]) -> std::io::Result<()> {
+    let content = std::fs::read_to_string(file)?;
+    let mut content = content.lines().collect::<Vec<&str>>();
+    for part in parts.iter().rev() {
+        let start = part.meta_variables.single.comment.range.end.line as usize + 1;
+        let end = part.range.end.line as usize - 1;
+        content.splice(start..=end, std::iter::empty());
+    }
+    std::fs::write(file, content.join("\n"))?;
+    Ok(())
 }
 
 /// get the list of files with the given extension in the given path
