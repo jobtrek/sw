@@ -41,7 +41,7 @@ fn main() {
             if parsed.is_empty() {
                 continue;
             }
-            remove_parts(&file, &parsed)
+            remove_parts(&file, &parsed, "todo!()")
                 .unwrap_or_else(|e| eprintln!("failed to remove parts from {}: {}", file, e));
         }
     }
@@ -49,13 +49,13 @@ fn main() {
 
 /// remove the parts of the file that are defined in the given list of programs
 /// parts are removed in reverse order to avoid changing the line numbers of the other parts
-fn remove_parts(file: &str, parts: &[Program]) -> std::io::Result<()> {
+fn remove_parts(file: &str, parts: &[Program], replace_with: &str) -> std::io::Result<()> {
     let content = std::fs::read_to_string(file)?;
     let mut content = content.lines().collect::<Vec<&str>>();
     for part in parts.iter().rev() {
         let start = part.meta_variables.single.comment.range.end.line as usize + 1;
         let end = part.range.end.line as usize - 1;
-        content.splice(start..=end, std::iter::empty());
+        content.splice(start..=end, std::iter::once(replace_with));
     }
     std::fs::write(file, content.join("\n"))?;
     Ok(())
