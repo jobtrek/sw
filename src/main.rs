@@ -43,8 +43,10 @@ fn main() {
             if parsed.is_empty() {
                 continue;
             }
-            remove_parts(&file, &parsed, "todo!()")
-                .unwrap_or_else(|e| eprintln!("failed to remove parts from {}: {}", file, e));
+            match extension {
+                "rs" => remove_parts(&file, &parsed, "todo!()"),
+                _ => remove_parts(&file, &parsed, ""),
+            }.unwrap_or_else(|e| eprintln!("failed to remove parts from {}: {}", file, e));
         }
     }
 }
