@@ -52,7 +52,8 @@ fn main() {
     let args = Args::parse();
     // extensions planed = "rs,php,js,ts,java"
     let supported_extensions = vec!["rs", "js"];
-    if args.extensions
+    if args
+        .extensions
         .iter()
         .any(|x| !supported_extensions.contains(&x.as_str()))
     {
