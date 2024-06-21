@@ -33,6 +33,9 @@ structstruck::strike! {
 fn main() {
     let path = "./test";
     let extensions = "rs,php,js,ts,java".split(',').collect::<Vec<&str>>();
+    if extensions.iter().any(|&x| !["rs", "php", "js", "ts", "java"].contains(&x)) {
+        panic!("invalid extensions, only 'rs', 'php', 'js', 'ts' and 'java' are allowed");
+    }
     for extension in extensions {
         let files = get_files(path, extension);
         for file in files {
