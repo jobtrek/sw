@@ -35,8 +35,14 @@ fn main() {
     // extensions planed = "rs,php,js,ts,java"
     let extensions = "rs,js".split(',').collect::<Vec<&str>>();
     let supported_extensions = "rs,js".split(',').collect::<Vec<&str>>();
-    if extensions.iter().any(|&x| !supported_extensions.contains(&x)) {
-        panic!("invalid extensions, only {:?} are allowed", supported_extensions);
+    if extensions
+        .iter()
+        .any(|&x| !supported_extensions.contains(&x))
+    {
+        panic!(
+            "invalid extensions, only {:?} are allowed",
+            supported_extensions
+        );
     }
     for extension in extensions {
         let files = get_files(path, extension);
@@ -48,7 +54,8 @@ fn main() {
             match extension {
                 "rs" => remove_parts(&file, &parsed, "todo!()"),
                 _ => remove_parts(&file, &parsed, ""),
-            }.unwrap_or_else(|e| eprintln!("failed to remove parts from {}: {}", file, e));
+            }
+            .unwrap_or_else(|e| eprintln!("failed to remove parts from {}: {}", file, e));
         }
     }
 }
