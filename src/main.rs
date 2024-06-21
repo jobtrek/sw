@@ -31,7 +31,7 @@ structstruck::strike! {
 }
 
 fn main() {
-    let path = "./example";
+    let path = "./test";
     let extensions = "rs,php,js,ts,java".split(',').collect::<Vec<&str>>();
     for extension in extensions {
         let files = get_files(path, extension);

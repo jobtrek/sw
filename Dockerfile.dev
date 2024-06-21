@@ -12,7 +12,7 @@ RUN echo "map - :E<CR>" >> ~/.vimrc
 
 COPY sgconfig.yml sgconfig.yml
 COPY ast-grep-rules ast-grep-rules
-COPY example example
+COPY test test
 
 COPY Cargo.* ./
 COPY src src
