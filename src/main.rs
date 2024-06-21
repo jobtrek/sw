@@ -1,3 +1,4 @@
+use clap::Parser;
 use serde::{Deserialize, Serialize};
 use std::process::Command;
 
@@ -30,8 +31,19 @@ structstruck::strike! {
     }
 }
 
+// structure of the clap arguments
+/*
+ * sw [path = "."]
+ * options:
+ */
+#[derive(Parser, Debug)]
+struct Args {
+    #[clap(default_value = ".")]
+    path: String,
+}
+
 fn main() {
-    let path = "./test";
+    let args = Args::parse();
     // extensions planed = "rs,php,js,ts,java"
     let extensions = "rs,js".split(',').collect::<Vec<&str>>();
     let supported_extensions = "rs,js".split(',').collect::<Vec<&str>>();
@@ -45,7 +57,7 @@ fn main() {
         );
     }
     for extension in extensions {
-        let files = get_files(path, extension);
+        let files = get_files(&args.path, extension);
         for file in files {
             let parsed = get_removable_parts(extension, &file);
             if parsed.is_empty() {
