@@ -36,6 +36,7 @@ structstruck::strike! {
  * sw [path = "."]
  * options:
  * -e --extensions [extensions = "rs,php,js,ts,java"]
+ * --silent [silent = false]
  */
 #[derive(Parser, Debug)]
 struct Args {
@@ -43,6 +44,8 @@ struct Args {
     path: String,
     #[clap(short, long, default_values_t = vec!["rs".to_string(), "js".to_string()])]
     extensions: Vec<String>,
+    #[clap(long)]
+    silent: bool,
 }
 
 fn main() {
@@ -62,7 +65,9 @@ fn main() {
         let extension = extension.as_str();
         let files = get_files(&args.path, extension);
         for file in files {
-            println!("{}", file);
+            if !args.silent {
+                println!("{}", file);
+            }
             let parsed = get_removable_parts(extension, &file);
             if parsed.is_empty() {
                 continue;
