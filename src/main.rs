@@ -50,16 +50,27 @@ fn main() {
 /// parts are removed in reverse order to avoid changing the line numbers of the other parts
 fn remove_parts(file: &str, parts: &[Program], replace_with: &str) -> std::io::Result<()> {
     let content = std::fs::read_to_string(file)?;
-    let mut content = content.lines().collect::<Vec<&str>>();
+    let mut content = content.lines().map(String::from).collect::<Vec<String>>();
     for part in parts.iter().rev() {
         content.splice(
             (part.meta_variables.single.comment.range.end.line as usize + 1)
                 ..=(part.range.end.line as usize - 1),
-            std::iter::once(replace_with),
+            indent(
+                replace_with,
+                part.meta_variables.single.comment.range.start.column as usize,
+            ),
         );
     }
     std::fs::write(file, content.join("\n"))?;
     Ok(())
+}
+
+/// add the right amount of spaces to the beginning of each lines
+fn indent(lines: &str, spaces: usize) -> Vec<String> {
+    lines
+        .lines()
+        .map(|x| format!("{: >width$}{}", "", x, width = spaces))
+        .collect()
 }
 
 /// get the list of files with the given extension in the given path
