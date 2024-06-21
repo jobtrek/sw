@@ -22,6 +22,5 @@ COPY --from=0 /etc/jobtrek/sw/sgconfig.yml /etc/jobtrek/sw/sgconfig.yml
 COPY --from=0 /etc/jobtrek/sw/ast-grep-rules /etc/jobtrek/sw/ast-grep-rules
 COPY --from=0 /usr/local/cargo/bin/ast-grep /usr/local/bin/ast-grep
 RUN apk add --no-cache fd
-COPY test test
 ENTRYPOINT ["sw"]
 
