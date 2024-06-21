@@ -32,9 +32,11 @@ structstruck::strike! {
 
 fn main() {
     let path = "./test";
-    let extensions = "rs,php,js,ts,java".split(',').collect::<Vec<&str>>();
-    if extensions.iter().any(|&x| !["rs", "php", "js", "ts", "java"].contains(&x)) {
-        panic!("invalid extensions, only 'rs', 'php', 'js', 'ts' and 'java' are allowed");
+    // extensions planed = "rs,php,js,ts,java"
+    let extensions = "rs,js".split(',').collect::<Vec<&str>>();
+    let supported_extensions = "rs,js".split(',').collect::<Vec<&str>>();
+    if extensions.iter().any(|&x| !supported_extensions.contains(&x)) {
+        panic!("invalid extensions, only {:?} are allowed", supported_extensions);
     }
     for extension in extensions {
         let files = get_files(path, extension);
@@ -93,7 +95,9 @@ fn get_removable_parts(extension: &str, file: &str) -> Vec<Program> {
         "ast-grep scan --rule /etc/jobtrek/sw/ast-grep-rules/{}.yaml {} --json",
         extension, file
     )))
-    .unwrap()
+    .unwrap_or_else(|e| {
+        panic!("failed to parse ast-grep output for {}: {}", file, e);
+    })
 }
 
 /// run a bash command and return the output
