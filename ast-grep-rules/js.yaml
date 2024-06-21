@@ -1,0 +1,15 @@
+id: my-rule
+language: javascript
+rule:
+  any:
+    - kind: statement_block
+  pattern: $BLOCK
+  has:
+    pattern: $COMMENT
+    all:
+      - any:
+        - kind: comment
+      - any:
+        - regex: "Write your code here"
+        - regex: "Write your logic here"
+
