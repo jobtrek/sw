@@ -1,8 +1,14 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
 name: Continuous integration pipeline
 on:
   pull_request:
     branches:
       - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 env:
   CARGO_TERM_COLOR: always
