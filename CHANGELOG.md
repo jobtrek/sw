@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.3](https://github.com/jobtrek/sw/compare/v0.1.2...v0.1.3) (2024-06-24)
+
+
+### Features
+
+* add command line arguments ([6611550](https://github.com/jobtrek/sw/commit/66115502b4d35dea8caf722a6f98084ecc81e84f))
+* allow user to chose the file type ([6611550](https://github.com/jobtrek/sw/commit/66115502b4d35dea8caf722a6f98084ecc81e84f))
+* allow user to chose to disable feedback ([6611550](https://github.com/jobtrek/sw/commit/66115502b4d35dea8caf722a6f98084ecc81e84f))
+
 ## [0.1.2](https://github.com/jobtrek/sw/compare/v0.1.1...v0.1.2) (2024-06-21)
 
 
