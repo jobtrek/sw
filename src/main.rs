@@ -48,7 +48,7 @@ struct Args {
     #[clap(long)]
     silent: bool,
 }
-   
+
 fn main() {
     let args = Args::parse();
     // extensions planed = "rs,php,js,ts,java"
