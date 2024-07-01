@@ -12,7 +12,8 @@ RUN echo -e "/src\n/target" > .gitignore
 
 COPY sgconfig.yml sgconfig.yml
 COPY ast-grep-rules ast-grep-rules
-COPY test test
+COPY test/test test
+COPY test/expected test_expected
 
 COPY Cargo.* ./
 COPY src src
