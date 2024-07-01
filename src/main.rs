@@ -34,6 +34,7 @@ structstruck::strike! {
 // structure of the clap arguments
 /*
  * sw [path = "."]
+ *
  * options:
  * -e --extensions [extensions = "rs,php,js,ts,java"]
  * --silent [silent = false]
@@ -42,7 +43,7 @@ structstruck::strike! {
 struct Args {
     #[clap(default_value = ".")]
     path: String,
-    #[clap(short, long, default_values_t = vec!["rs".to_string(), "js".to_string()])]
+    #[clap(short, long, default_values_t = vec!["rs".to_string(), "js".to_string(), "ts".to_string()])]
     extensions: Vec<String>,
     #[clap(long)]
     silent: bool,
@@ -51,7 +52,7 @@ struct Args {
 fn main() {
     let args = Args::parse();
     // extensions planed = "rs,php,js,ts,java"
-    let supported_extensions = vec!["rs", "js"];
+    let supported_extensions = vec!["rs", "js", "ts"];
     if args
         .extensions
         .iter()
