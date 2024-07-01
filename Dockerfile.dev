@@ -8,6 +8,7 @@ RUN rustup component add rustfmt
 RUN rustup component add clippy
 RUN echo "map - :E<CR>" >> ~/.vimrc
 RUN echo -e "[user]\n\tname = \"test\"\n\temail = \"test@example.com\"" > ~/.gitconfig
+RUN echo -e "/src\n/target" > .gitignore
 
 COPY sgconfig.yml sgconfig.yml
 COPY ast-grep-rules ast-grep-rules
