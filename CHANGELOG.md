@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.1.4](https://github.com/jobtrek/sw/compare/v0.1.3...v0.1.4) (2024-07-02)
+
+
+### Features
+
+* add files with the expectated result of the tests ([#20](https://github.com/jobtrek/sw/issues/20)) ([63b2457](https://github.com/jobtrek/sw/commit/63b24575cea23b3f6d9718368867ee050096534c))
+* add test expectation files ([63b2457](https://github.com/jobtrek/sw/commit/63b24575cea23b3f6d9718368867ee050096534c))
+* add typescript ([#17](https://github.com/jobtrek/sw/issues/17)) ([fca07e0](https://github.com/jobtrek/sw/commit/fca07e0afa006bbed1d9f68b093cf880b9bb84f3))
+
+
+### Miscellaneous Chores
+
+* add license ([#15](https://github.com/jobtrek/sw/issues/15)) ([379f21e](https://github.com/jobtrek/sw/commit/379f21eb44db847eda9aeec7abbef1ba976de936))
+* **deps:** bump clap from 4.5.7 to 4.5.8 ([#18](https://github.com/jobtrek/sw/issues/18)) ([6c344cb](https://github.com/jobtrek/sw/commit/6c344cb93846815f52e3d3b0d57e4ed5f1fc3703))
+* **deps:** bump serde_json from 1.0.117 to 1.0.119 ([#19](https://github.com/jobtrek/sw/issues/19)) ([7ba4e86](https://github.com/jobtrek/sw/commit/7ba4e8670e341b2d53d8cfd8e37de53afc019539))
+
+
+### Refactors
+
+* move test and expected result in same folder ([63b2457](https://github.com/jobtrek/sw/commit/63b24575cea23b3f6d9718368867ee050096534c))
+
 ## [0.1.3](https://github.com/jobtrek/sw/compare/v0.1.2...v0.1.3) (2024-06-24)
 
 
