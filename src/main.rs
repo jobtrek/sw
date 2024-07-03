@@ -41,8 +41,8 @@ structstruck::strike! {
  */
 #[derive(Parser, Debug)]
 struct Args {
-    #[clap(default_value = ".")]
-    path: String,
+    #[clap(default_values = &["."])]
+    paths: Vec<String>,
     #[clap(short, long, default_values_t = vec!["rs".to_string(), "js".to_string(), "ts".to_string()])]
     extensions: Vec<String>,
     #[clap(long)]
@@ -65,20 +65,22 @@ fn main() {
     }
     for extension in args.extensions {
         let extension = extension.as_str();
-        let files = get_files(&args.path, extension);
-        for file in files {
-            if !args.silent {
-                println!("{}", file);
+        for path in args.paths.iter() {
+            let files = get_files(path, extension);
+            for file in files {
+                if !args.silent {
+                    println!("{}", file);
+                }
+                let parsed = get_removable_parts(extension, &file);
+                if parsed.is_empty() {
+                    continue;
+                }
+                match extension {
+                    "rs" => remove_parts(&file, &parsed, "todo!()"),
+                    _ => remove_parts(&file, &parsed, ""),
+                }
+                .unwrap_or_else(|e| eprintln!("failed to remove parts from {}: {}", file, e));
             }
-            let parsed = get_removable_parts(extension, &file);
-            if parsed.is_empty() {
-                continue;
-            }
-            match extension {
-                "rs" => remove_parts(&file, &parsed, "todo!()"),
-                _ => remove_parts(&file, &parsed, ""),
-            }
-            .unwrap_or_else(|e| eprintln!("failed to remove parts from {}: {}", file, e));
         }
     }
 }
