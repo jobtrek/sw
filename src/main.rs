@@ -44,7 +44,7 @@ structstruck::strike! {
 struct Args {
     #[clap(default_values = &["."])]
     paths: Vec<String>,
-    #[clap(short, long, value_enum, default_values = &["rs", "php", "js", "ts"])]
+    #[clap(short, long, value_enum, default_values = &["rs", "php", "js", "ts", "java"])]
     extensions: Vec<Extension>,
     #[clap(long)]
     silent: bool,
@@ -56,7 +56,7 @@ enum Extension {
     Php,
     Js,
     Ts,
-    // Java,
+    Java,
 }
 impl Extension {
     fn as_str(&self) -> &str {
@@ -65,7 +65,7 @@ impl Extension {
             Self::Php => "php",
             Self::Js => "js",
             Self::Ts => "ts",
-            // Self::Java => "java",
+            Self::Java => "java",
         }
     }
 }
@@ -77,7 +77,7 @@ impl std::str::FromStr for Extension {
             "php" => Ok(Self::Php),
             "js" => Ok(Self::Js),
             "ts" => Ok(Self::Ts),
-            // "java" => Ok(Self::Java),
+            "java" => Ok(Self::Java),
             _ => Err(format!("invalid extension: {}", s)),
         }
     }
