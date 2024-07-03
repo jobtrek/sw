@@ -43,7 +43,7 @@ structstruck::strike! {
 struct Args {
     #[clap(default_value = ".")]
     path: String,
-    #[clap(short, long, value_enum, default_values = &["rs", "js", "ts"])]
+    #[clap(short, long, value_enum, default_values = &["rs", "js", "ts", "php"])]
     extensions: Vec<Extension>,
     #[clap(long)]
     silent: bool,
@@ -52,7 +52,7 @@ struct Args {
 #[derive(clap::ValueEnum, Clone, Debug)]
 enum Extension {
     Rs,
-    // Php,
+    Php,
     Js,
     Ts,
     // Java,
@@ -61,7 +61,7 @@ impl Extension {
     fn as_str(&self) -> &str {
         match self {
             Self::Rs => "rs",
-            // Self::Php => "php",
+            Self::Php => "php",
             Self::Js => "js",
             Self::Ts => "ts",
             // Self::Java => "java",
@@ -73,7 +73,7 @@ impl std::str::FromStr for Extension {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "rs" => Ok(Self::Rs),
-            // "php" => Ok(Self::Php),
+            "php" => Ok(Self::Php),
             "js" => Ok(Self::Js),
             "ts" => Ok(Self::Ts),
             // "java" => Ok(Self::Java),
