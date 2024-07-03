@@ -65,11 +65,17 @@ fn main() {
         );
     }
     check_paths_exist(&args.paths);
+    let mut checked_files = Vec::new();
     for extension in args.extensions {
         let extension = extension.as_str();
         for path in args.paths.iter() {
             let files = get_files(path, extension);
             for file in files {
+                if checked_files.contains(&file) {
+                    continue;
+                } else {
+                    checked_files.push(file.clone());
+                }
                 if !args.silent {
                     println!("{}", file);
                 }
