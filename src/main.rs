@@ -43,7 +43,7 @@ structstruck::strike! {
 struct Args {
     #[clap(default_value = ".")]
     path: String,
-    #[clap(short, long, value_enum, default_values_t = vec![Extension::Rs, Extension::Js, Extension::Ts])]
+    #[clap(short, long, value_enum, default_values = &["rs", "js", "ts"])]
     extensions: Vec<Extension>,
     #[clap(long)]
     silent: bool,
