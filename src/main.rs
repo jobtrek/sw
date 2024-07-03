@@ -121,18 +121,17 @@ fn get_files(path: &str, extension: &str) -> Vec<String> {
     let fail = |e| {
         panic!("failed to get metadata for {}: {}", path, e);
     };
-    if std::fs::metadata(path).unwrap_or_else(fail).is_file() {
-        if path.ends_with(format!(".{}", extension).as_str()) {
-            return vec![path.to_string()];
-        } else {
-            return vec![];
-        }
+    if std::fs::metadata(path).unwrap_or_else(fail).is_dir() {
+        return run_command(&format!("fd . {} -e {} --type f", path, extension))
+            .split('\n')
+            .filter(|&x| !x.is_empty())
+            .map(|x| x.to_string())
+            .collect::<Vec<String>>();
     }
-    run_command(&format!("fd . {} -e {} --type f", path, extension))
-        .split('\n')
-        .filter(|&x| !x.is_empty())
-        .map(|x| x.to_string())
-        .collect::<Vec<String>>()
+    if !path.ends_with(format!(".{}", extension).as_str()) {
+        return vec![];
+    }
+    vec![path.to_string()]
 }
 
 /// get the positions of the comments and block who define the beginning of the part to remove
