@@ -44,26 +44,47 @@ structstruck::strike! {
 struct Args {
     #[clap(default_values = &["."])]
     paths: Vec<String>,
-    #[clap(short, long, default_values_t = vec!["rs".to_string(), "js".to_string(), "ts".to_string()])]
-    extensions: Vec<String>,
+    #[clap(short, long, value_enum, default_values = &["rs", "js", "ts"])]
+    extensions: Vec<Extension>,
     #[clap(long)]
     silent: bool,
 }
 
+#[derive(clap::ValueEnum, Clone, Debug)]
+enum Extension {
+    Rs,
+    // Php,
+    Js,
+    Ts,
+    // Java,
+}
+impl Extension {
+    fn as_str(&self) -> &str {
+        match self {
+            Self::Rs => "rs",
+            // Self::Php => "php",
+            Self::Js => "js",
+            Self::Ts => "ts",
+            // Self::Java => "java",
+        }
+    }
+}
+impl std::str::FromStr for Extension {
+    type Err = String;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "rs" => Ok(Self::Rs),
+            // "php" => Ok(Self::Php),
+            "js" => Ok(Self::Js),
+            "ts" => Ok(Self::Ts),
+            // "java" => Ok(Self::Java),
+            _ => Err(format!("invalid extension: {}", s)),
+        }
+    }
+}
+
 fn main() {
     let args = Args::parse();
-    // extensions planed = "rs,php,js,ts,java"
-    let supported_extensions = vec!["rs", "js", "ts"];
-    if args
-        .extensions
-        .iter()
-        .any(|x| !supported_extensions.contains(&x.as_str()))
-    {
-        panic!(
-            "invalid extensions, only {:?} are allowed",
-            supported_extensions
-        );
-    }
     check_paths_exist(&args.paths);
     let mut checked_files = Vec::new();
     for extension in args.extensions {
