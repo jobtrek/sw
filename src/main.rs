@@ -43,13 +43,13 @@ structstruck::strike! {
 struct Args {
     #[clap(default_value = ".")]
     path: String,
-    #[clap(short, long)]
+    #[clap(short, long, value_enum, default_values_t = vec![Extension::Rs, Extension::Js, Extension::Ts])]
     extensions: Vec<Extension>,
     #[clap(long)]
     silent: bool,
 }
 
-#[derive(Clone, Debug)]
+#[derive(clap::ValueEnum, Clone, Debug)]
 enum Extension {
     Rs,
     // Php,
