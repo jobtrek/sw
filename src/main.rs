@@ -1,5 +1,6 @@
 use clap::Parser;
 use serde::{Deserialize, Serialize};
+use std::process::exit;
 use std::process::Command;
 
 // structure of the json returned by ast-grep (only the useful parts)
@@ -41,8 +42,8 @@ structstruck::strike! {
  */
 #[derive(Parser, Debug)]
 struct Args {
-    #[clap(default_value = ".")]
-    path: String,
+    #[clap(default_values = &["."])]
+    paths: Vec<String>,
     #[clap(short, long, value_enum, default_values = &["rs", "js", "ts"])]
     extensions: Vec<Extension>,
     #[clap(long)]
@@ -84,22 +85,31 @@ impl std::str::FromStr for Extension {
 
 fn main() {
     let args = Args::parse();
+    check_paths_exist(&args.paths);
+    let mut checked_files = Vec::new();
     for extension in args.extensions {
         let extension = extension.as_str();
-        let files = get_files(&args.path, extension);
-        for file in files {
-            if !args.silent {
-                println!("{}", file);
+        for path in args.paths.iter() {
+            let files = get_files(path, extension);
+            for file in files {
+                if checked_files.contains(&file) {
+                    continue;
+                } else {
+                    checked_files.push(file.clone());
+                }
+                if !args.silent {
+                    println!("{}", file);
+                }
+                let parsed = get_removable_parts(extension, &file);
+                if parsed.is_empty() {
+                    continue;
+                }
+                match extension {
+                    "rs" => remove_parts(&file, &parsed, "todo!()"),
+                    _ => remove_parts(&file, &parsed, ""),
+                }
+                .unwrap_or_else(|e| eprintln!("failed to remove parts from {}: {}", file, e));
             }
-            let parsed = get_removable_parts(extension, &file);
-            if parsed.is_empty() {
-                continue;
-            }
-            match extension {
-                "rs" => remove_parts(&file, &parsed, "todo!()"),
-                _ => remove_parts(&file, &parsed, ""),
-            }
-            .unwrap_or_else(|e| eprintln!("failed to remove parts from {}: {}", file, e));
         }
     }
 }
@@ -132,12 +142,23 @@ fn indent(lines: &str, spaces: usize) -> Vec<String> {
 }
 
 /// get the list of files with the given extension in the given path
+/// if the path is a file with the right extension, return a list with only this file
+/// if the path is a file with the wrong extension, return an empty list
 fn get_files(path: &str, extension: &str) -> Vec<String> {
-    run_command(&format!("fd . {} -e {} --type f", path, extension))
-        .split('\n')
-        .filter(|&x| !x.is_empty())
-        .map(|x| x.to_string())
-        .collect::<Vec<String>>()
+    let fail = |e| {
+        panic!("failed to get metadata for {}: {}", path, e);
+    };
+    if std::fs::metadata(path).unwrap_or_else(fail).is_dir() {
+        return run_command(&format!("fd . {} -e {} --type f", path, extension))
+            .split('\n')
+            .filter(|&x| !x.is_empty())
+            .map(|x| x.to_string())
+            .collect::<Vec<String>>();
+    }
+    if !path.ends_with(format!(".{}", extension).as_str()) {
+        return vec![];
+    }
+    vec![path.to_string()]
 }
 
 /// get the positions of the comments and block who define the beginning of the part to remove
@@ -162,4 +183,21 @@ fn run_command(command: &str) -> String {
             .stdout,
     )
     .unwrap()
+}
+
+/// check if the given paths exist
+/// panic at the end if one of the paths does not exist, with the list of the missing paths
+/// paths can be files or directories
+fn check_paths_exist(paths: &[String]) {
+    let missing_paths = paths
+        .iter()
+        .filter(|&x| !std::path::Path::new(x).exists())
+        .map(|x| x.to_string())
+        .collect::<Vec<String>>();
+    if !missing_paths.is_empty() {
+        for path in missing_paths {
+            eprintln!("path does not exist: {}", path);
+        }
+        exit(1);
+    }
 }
