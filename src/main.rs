@@ -118,9 +118,10 @@ fn indent(lines: &str, spaces: usize) -> Vec<String> {
 /// if the path is a file with the right extension, return a list with only this file
 /// if the path is a file with the wrong extension, return an empty list
 fn get_files(path: &str, extension: &str) -> Vec<String> {
-    if std::fs::metadata(path).unwrap_or_else(|e| {
+    let fail = |e| {
         panic!("failed to get metadata for {}: {}", path, e);
-    }).is_file() {
+    };
+    if std::fs::metadata(path).unwrap_or_else(fail).is_file() {
         if path.ends_with(format!(".{}", extension).as_str()) {
             return vec![path.to_string()];
         } else {
