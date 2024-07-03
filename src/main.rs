@@ -1,5 +1,6 @@
 use clap::Parser;
 use serde::{Deserialize, Serialize};
+use std::process::exit;
 use std::process::Command;
 
 // structure of the json returned by ast-grep (only the useful parts)
@@ -63,6 +64,7 @@ fn main() {
             supported_extensions
         );
     }
+    check_paths_exist(&args.paths);
     for extension in args.extensions {
         let extension = extension.as_str();
         for path in args.paths.iter() {
@@ -143,4 +145,21 @@ fn run_command(command: &str) -> String {
             .stdout,
     )
     .unwrap()
+}
+
+/// check if the given paths exist
+/// panic at the end if one of the paths does not exist, with the list of the missing paths
+/// paths can be files or directories
+fn check_paths_exist(paths: &[String]) {
+    let missing_paths = paths
+        .iter()
+        .filter(|&x| !std::path::Path::new(x).exists())
+        .map(|x| x.to_string())
+        .collect::<Vec<String>>();
+    if !missing_paths.is_empty() {
+        for path in missing_paths {
+            eprintln!("path does not exist: {}", path);
+        }
+        exit(1);
+    }
 }
