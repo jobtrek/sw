@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.5](https://github.com/jobtrek/sw/compare/v0.1.4...v0.1.5) (2024-07-03)
+
+
+### Features
+
+* add java language ([#24](https://github.com/jobtrek/sw/issues/24)) ([0266bd9](https://github.com/jobtrek/sw/commit/0266bd92947cc3b885a7fe3d57bfa29f10ebf02d))
+* upgrade path selection ([#22](https://github.com/jobtrek/sw/issues/22)) ([e421db0](https://github.com/jobtrek/sw/commit/e421db002b35470ad7f795c796675e4f94fc942b))
+
+
+### Refactors
+
+* use an enum to recognize extensions instead of testing it in main() ([#21](https://github.com/jobtrek/sw/issues/21)) ([8ad79eb](https://github.com/jobtrek/sw/commit/8ad79eb68b0245879c5ffc7176855883f8d418a8))
+
 ## [0.1.4](https://github.com/jobtrek/sw/compare/v0.1.3...v0.1.4) (2024-07-02)
 
 
