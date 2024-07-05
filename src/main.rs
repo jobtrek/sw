@@ -69,20 +69,6 @@ impl Extension {
         }
     }
 }
-impl std::str::FromStr for Extension {
-    type Err = String;
-    /// parse the string to an extension
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        match s {
-            "rs" => Ok(Self::Rs),
-            // "php" => Ok(Self::Php),
-            "js" => Ok(Self::Js),
-            "ts" => Ok(Self::Ts),
-            "java" => Ok(Self::Java),
-            _ => Err(format!("invalid extension: {}", s)),
-        }
-    }
-}
 
 /// main function of the program
 /// get the list of files matching the arguments given by the user
