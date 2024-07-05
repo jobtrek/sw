@@ -146,7 +146,14 @@ fn remove_parts(file: &str, area_to_remove: &[Program], replace_with: &str) -> s
 }
 
 /// add the right amount of spaces to the beginning of each lines
-fn indent(lines: &str, spaces: usize) -> Vec<String> {
+///
+/// ```
+/// assert_eq!(sw::main::indent("a\nb", 2), vec!["  a", "  b"]);
+/// assert_eq!(sw::main::indent("a\nb", 0), vec!["a", "b"]);
+/// assert_eq!(sw::main::indent("a", 2), vec!["  a"]);
+/// assert_eq!(sw::main::indent("", 2), Vec::<String>::new());
+/// ```
+pub fn indent(lines: &str, spaces: usize) -> Vec<String> {
     lines
         .lines()
         .map(|x| format!("{: >width$}{}", "", x, width = spaces))
@@ -185,7 +192,12 @@ fn get_removable_parts(extension: &str, file: &str) -> Vec<Program> {
 }
 
 /// run a bash command and return the output
-fn run_command(command: &str) -> String {
+///
+/// ```
+/// assert_eq!(sw::main::run_command("echo test"), "test\n");
+/// assert_eq!(sw::main::run_command("cat src/main.rs"), std::fs::read_to_string("src/main.rs").unwrap());
+/// ```
+pub fn run_command(command: &str) -> String {
     String::from_utf8(
         Command::new("sh")
             .arg("-c")
@@ -200,7 +212,17 @@ fn run_command(command: &str) -> String {
 /// check if the given paths exist
 /// panic at the end if one of the paths does not exist, with the list of the missing paths
 /// paths can be files or directories
-fn check_paths_exist(paths: &[String]) {
+///
+/// ```
+/// sw::main::check_paths_exist(&["src/main.rs".to_string(), "..".to_string()]);
+/// ```
+/// ```rust,should_panic
+/// sw::main::check_paths_exist(&["not_existing.nothing".to_string()]);
+/// ```
+/// ```rust,should_panic
+/// sw::main::check_paths_exist(&["src/main.rs".to_string(), "not_existing.nothing".to_string()]);
+/// ```
+pub fn check_paths_exist(paths: &[String]) {
     let missing_paths = paths
         .iter()
         .filter(|&x| !std::path::Path::new(x).exists())
