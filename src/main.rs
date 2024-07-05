@@ -3,8 +3,8 @@ use serde::{Deserialize, Serialize};
 use std::process::exit;
 use std::process::Command;
 
-// structure of the json returned by ast-grep (only the useful parts)
 structstruck::strike! {
+    /// structure of the json returned by ast-grep (only the useful parts)
     #[strikethrough[derive(Serialize, Deserialize, Debug)]]
     struct Program {
         text: String,
@@ -32,14 +32,12 @@ structstruck::strike! {
     }
 }
 
-// structure of the clap arguments
-/*
- * sw [path = "."]
- *
- * options:
- * -e --extensions [extensions = "rs,php,js,ts,java"]
- * --silent [silent = false]
- */
+/// structure of the clap arguments
+/// sw [path = "."]
+///
+/// options:
+/// -e --extensions [extensions = "rs,php,js,ts,java"]
+/// --silent [silent = false]
 #[derive(Parser, Debug)]
 struct Args {
     #[clap(default_values = &["."])]
@@ -50,6 +48,7 @@ struct Args {
     silent: bool,
 }
 
+/// enum to represent all possible extensions
 #[derive(clap::ValueEnum, Clone, Debug)]
 enum Extension {
     Rs,
@@ -59,6 +58,7 @@ enum Extension {
     Java,
 }
 impl Extension {
+    /// return the string representation of the extension
     fn as_str(&self) -> &str {
         match self {
             Self::Rs => "rs",
@@ -71,6 +71,7 @@ impl Extension {
 }
 impl std::str::FromStr for Extension {
     type Err = String;
+    /// parse the string to an extension
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "rs" => Ok(Self::Rs),
@@ -83,16 +84,22 @@ impl std::str::FromStr for Extension {
     }
 }
 
+/// main function of the program
+/// get the list of files matching the arguments given by the user
+/// for each of these files, get wich parts are solutions that should be removed
+/// remove these parts from the files
 fn main() {
     let args = Args::parse();
     check_paths_exist(&args.paths);
     let mut checked_files = Vec::new();
+
     for extension in args.extensions {
         let extension = extension.as_str();
         for path in args.paths.iter() {
             let files = get_files(path, extension);
             for file in files {
                 if checked_files.contains(&file) {
+                    // if a file is in multiple paths, it may be checked multiple times so we skip it
                     continue;
                 } else {
                     checked_files.push(file.clone());
@@ -102,6 +109,7 @@ fn main() {
                 }
                 let parsed = get_removable_parts(extension, &file);
                 if parsed.is_empty() {
+                    // don't modyfy a file if it has nothing to remove
                     continue;
                 }
                 match extension {
@@ -115,10 +123,14 @@ fn main() {
 }
 
 /// remove the parts of the file that are defined in the given list of programs
-/// parts are removed in reverse order to avoid changing the line numbers of the other parts
+/// they are removed in reverse order to avoid changing the line numbers of the area that still haven't been removed
 fn remove_parts(file: &str, parts: &[Program], replace_with: &str) -> std::io::Result<()> {
     let content = std::fs::read_to_string(file)?;
-    let mut content = content.lines().map(String::from).collect::<Vec<String>>();
+    // convert the content of the file from a string to a vector of strings (one string per line)
+    let mut content = content
+        .lines()
+        .map(String::from)
+        .collect::<Vec<String>>();
     for part in parts.iter().rev() {
         content.splice(
             (part.meta_variables.single.comment.range.end.line as usize + 1)
@@ -161,7 +173,7 @@ fn get_files(path: &str, extension: &str) -> Vec<String> {
     vec![path.to_string()]
 }
 
-/// get the positions of the comments and block who define the beginning of the part to remove
+/// get the positions of the comments and block who define the part to remove
 fn get_removable_parts(extension: &str, file: &str) -> Vec<Program> {
     serde_json::from_str(&run_command(&format!(
         "ast-grep scan --rule /etc/jobtrek/sw/ast-grep-rules/{}.yaml {} --json",
