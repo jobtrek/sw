@@ -124,24 +124,24 @@ fn main() {
 
 /// remove the parts of the file that are defined in the given list of programs
 /// they are removed in reverse order to avoid changing the line numbers of the area that still haven't been removed
-fn remove_parts(file: &str, parts: &[Program], replace_with: &str) -> std::io::Result<()> {
-    let content = std::fs::read_to_string(file)?;
+fn remove_parts(file: &str, area_to_remove: &[Program], replace_with: &str) -> std::io::Result<()> {
+    let file_content = std::fs::read_to_string(file)?;
     // convert the content of the file from a string to a vector of strings (one string per line)
-    let mut content = content
+    let mut file_content = file_content
         .lines()
         .map(String::from)
         .collect::<Vec<String>>();
-    for part in parts.iter().rev() {
-        content.splice(
-            (part.meta_variables.single.comment.range.end.line as usize + 1)
-                ..=(part.range.end.line as usize - 1),
+    for area in area_to_remove.iter().rev() {
+        file_content.splice(
+            (area.meta_variables.single.comment.range.end.line as usize + 1)
+                ..=(area.range.end.line as usize - 1),
             indent(
                 replace_with,
-                part.meta_variables.single.comment.range.start.column as usize,
+                area.meta_variables.single.comment.range.start.column as usize,
             ),
         );
     }
-    std::fs::write(file, content.join("\n"))?;
+    std::fs::write(file, file_content.join("\n"))?;
     Ok(())
 }
 
