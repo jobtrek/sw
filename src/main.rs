@@ -101,9 +101,9 @@ fn main() {
                 if checked_files.contains(&file) {
                     // if a file is in multiple paths, it may be checked multiple times so we skip it
                     continue;
-                } else {
-                    checked_files.push(file.clone());
                 }
+                checked_files.push(file.clone());
+
                 if !args.silent {
                     println!("{}", file);
                 }
