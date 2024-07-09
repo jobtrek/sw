@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.6](https://github.com/jobtrek/sw/compare/v0.1.5...v0.1.6) (2024-07-09)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump serde from 1.0.203 to 1.0.204 ([#27](https://github.com/jobtrek/sw/issues/27)) ([9da3f13](https://github.com/jobtrek/sw/commit/9da3f1319a08f6e175d5d0d67a288e8481c408d0))
+* **deps:** bump serde_json from 1.0.119 to 1.0.120 ([#26](https://github.com/jobtrek/sw/issues/26)) ([eab724c](https://github.com/jobtrek/sw/commit/eab724cc6a10f8aeb8359c56fd05a087d89b8dc8))
+* remove prerelease from release please config ([#34](https://github.com/jobtrek/sw/issues/34)) ([6205fd8](https://github.com/jobtrek/sw/commit/6205fd878a6807186f2b1172d3da2482430abc35))
+
 ## [0.1.5](https://github.com/jobtrek/sw/compare/v0.1.4...v0.1.5) (2024-07-03)
 
 
