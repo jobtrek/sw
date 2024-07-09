@@ -83,7 +83,7 @@ fn main() {
     for extension in args.extensions {
         let extension = extension.as_str();
         for path in args.paths.iter() {
-            let files = get_files_per_extension(path, extension, args.fd_bin_path.as_deref());
+            let files = get_files_per_extension(path, extension, args.fd_bin_path.as_deref()).unwrap();
             for file in files {
                 if checked_files.contains(&file) {
                     // if a file is in multiple paths, it may be checked multiple times so we skip it
