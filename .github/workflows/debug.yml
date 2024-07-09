@@ -23,6 +23,6 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y fd-find
       - run: rustc src/a.rs
       - run: echo 'alias fd="fdfind"' > ~/.bashrc
-      - run: fd . src -e rs --type f
+      - run: fdfind . src -e rs --type f
       - run: ./a
 
