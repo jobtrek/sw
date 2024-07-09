@@ -20,6 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: rustup update stable && rustup default stable
-      - run: rustc a.rs
-      - run: ./a
+      - run: rustc src/a.rs
+      - run: src/a
 
