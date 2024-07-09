@@ -19,10 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: rustup update stable && rustup default stable
-      - run: sudo apt-get update && sudo apt-get install -y fd-find
-      - run: rustc src/a.rs
       - run: |
+          rustup update stable && rustup default stable
+          sudo apt-get update && sudo apt-get install -y fd-findrustc src/a.rs
           alias fd=fdfind
           fd . src -e rs --type f
           ./a
