@@ -51,16 +51,17 @@ pub fn check_paths_exist(paths: &[String]) {
 /// if the path is a file with the wrong extension, return an empty list
 ///
 /// ```
-/// assert!(sw::get_files_per_extension("src", "rs").contains(&"src/lib.rs".to_string()));
-/// assert_eq!(sw::get_files_per_extension("src/lib.rs", "rs"), vec!["src/lib.rs".to_string()]);
-/// assert_eq!(sw::get_files_per_extension("src/lib.rs", "toml"), Vec::<String>::new());
+/// let fd_bin_path = Some("fdfind"); // set on None if your bin is called "fd", otherwise set the path to the binary
+/// assert!(sw::get_files_per_extension("src", "rs", fd_bin_path).contains(&"src/lib.rs".to_string()));
+/// assert_eq!(sw::get_files_per_extension("src/lib.rs", "rs", fd_bin_path), vec!["src/lib.rs".to_string()]);
+/// assert_eq!(sw::get_files_per_extension("src/lib.rs", "toml", fd_bin_path), Vec::<String>::new());
 /// ```
-pub fn get_files_per_extension(path: &str, extension: &str) -> Vec<String> {
+pub fn get_files_per_extension(path: &str, extension: &str, fd_bin_path: Option<&str>) -> Vec<String> {
     let fail = |e| {
         panic!("failed to get metadata for {}: {}", path, e);
     };
     if std::fs::metadata(path).unwrap_or_else(fail).is_dir() {
-        return run_command(&format!("fd . {} -e {} --type f", path, extension))
+        return run_command(&format!("{} . {} -e {} --type f", fd_bin_path.unwrap_or("fd"), path, extension))
             .split('\n')
             .filter(|&x| !x.is_empty())
             .map(|x| x.to_string())

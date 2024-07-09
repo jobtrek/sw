@@ -45,6 +45,8 @@ struct Args {
     extensions: Vec<Extension>,
     #[clap(long)]
     silent: bool,
+    #[clap(long)]
+    fd_bin_path: Option<String>,
 }
 
 /// enum to represent all possible extensions
@@ -81,7 +83,7 @@ fn main() {
     for extension in args.extensions {
         let extension = extension.as_str();
         for path in args.paths.iter() {
-            let files = get_files_per_extension(path, extension);
+            let files = get_files_per_extension(path, extension, args.fd_bin_path.as_deref());
             for file in files {
                 if checked_files.contains(&file) {
                     // if a file is in multiple paths, it may be checked multiple times so we skip it

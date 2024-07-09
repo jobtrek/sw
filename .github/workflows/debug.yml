@@ -22,9 +22,6 @@ jobs:
       - run: rustup update stable && rustup default stable
       - run: sudo apt-get update && sudo apt-get install -y fd-find
       - run: rustc src/a.rs
-      - run: |
-          shopt -s expand_aliases
-          alias fd='fdfind'
-          fd . src -e rs --type f
-          ./a
+      - run: fdfind . src -e rs --type f
+      - run: ./a
 
