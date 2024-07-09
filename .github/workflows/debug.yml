@@ -24,7 +24,7 @@ jobs:
       - run: rustc src/a.rs
       - run: |
           shopt -s expand_aliases
-          sudo copy /usr/bin/fdfind /usr/bin/fd
+          alias fd='fdfind'
           fd . src -e rs --type f
           ./a
 
