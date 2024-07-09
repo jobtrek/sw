@@ -1,7 +1,6 @@
 use clap::Parser;
 use serde::{Deserialize, Serialize};
-use std::process::exit;
-use std::process::Command;
+use sw::{check_paths_exist, get_files_per_extension, run_command};
 
 structstruck::strike! {
     /// structure of the json returned by ast-grep (only the useful parts)
@@ -82,7 +81,7 @@ fn main() {
     for extension in args.extensions {
         let extension = extension.as_str();
         for path in args.paths.iter() {
-            let files = get_files(path, extension);
+            let files = get_files_per_extension(path, extension);
             for file in files {
                 if checked_files.contains(&file) {
                     // if a file is in multiple paths, it may be checked multiple times so we skip it
@@ -146,26 +145,6 @@ pub fn indent(lines: &str, spaces: usize) -> Vec<String> {
         .collect()
 }
 
-/// get the list of files with the given extension in the given path
-/// if the path is a file with the right extension, return a list with only this file
-/// if the path is a file with the wrong extension, return an empty list
-fn get_files(path: &str, extension: &str) -> Vec<String> {
-    let fail = |e| {
-        panic!("failed to get metadata for {}: {}", path, e);
-    };
-    if std::fs::metadata(path).unwrap_or_else(fail).is_dir() {
-        return run_command(&format!("fd . {} -e {} --type f", path, extension))
-            .split('\n')
-            .filter(|&x| !x.is_empty())
-            .map(|x| x.to_string())
-            .collect::<Vec<String>>();
-    }
-    if !path.ends_with(format!(".{}", extension).as_str()) {
-        return vec![];
-    }
-    vec![path.to_string()]
-}
-
 /// get the positions of the comments and block who define the part to remove
 fn get_removable_parts(extension: &str, file: &str) -> Vec<Program> {
     serde_json::from_str(&run_command(&format!(
@@ -175,49 +154,4 @@ fn get_removable_parts(extension: &str, file: &str) -> Vec<Program> {
     .unwrap_or_else(|e| {
         panic!("failed to parse ast-grep output for {}: {}", file, e);
     })
-}
-
-/// run a bash command and return the output
-///
-/// ```
-/// assert_eq!(sw::main::run_command("echo test"), "test\n");
-/// assert_eq!(sw::main::run_command("cat src/main.rs"), std::fs::read_to_string("src/main.rs").unwrap());
-/// ```
-pub fn run_command(command: &str) -> String {
-    String::from_utf8(
-        Command::new("sh")
-            .arg("-c")
-            .arg(command)
-            .output()
-            .expect("failed to execute process")
-            .stdout,
-    )
-    .unwrap()
-}
-
-/// check if the given paths exist
-/// panic at the end if one of the paths does not exist, with the list of the missing paths
-/// paths can be files or directories
-///
-/// ```
-/// sw::main::check_paths_exist(&["src/main.rs".to_string(), "..".to_string()]);
-/// ```
-/// ```rust,should_panic
-/// sw::main::check_paths_exist(&["not_existing.nothing".to_string()]);
-/// ```
-/// ```rust,should_panic
-/// sw::main::check_paths_exist(&["src/main.rs".to_string(), "not_existing.nothing".to_string()]);
-/// ```
-pub fn check_paths_exist(paths: &[String]) {
-    let missing_paths = paths
-        .iter()
-        .filter(|&x| !std::path::Path::new(x).exists())
-        .map(|x| x.to_string())
-        .collect::<Vec<String>>();
-    if !missing_paths.is_empty() {
-        for path in missing_paths {
-            eprintln!("path does not exist: {}", path);
-        }
-        exit(1);
-    }
 }
