@@ -131,13 +131,6 @@ fn remove_parts(file: &str, area_to_remove: &[Program], replace_with: &str) -> s
 }
 
 /// add the right amount of spaces to the beginning of each lines
-///
-/// ```
-/// assert_eq!(sw::main::indent("a\nb", 2), vec!["  a", "  b"]);
-/// assert_eq!(sw::main::indent("a\nb", 0), vec!["a", "b"]);
-/// assert_eq!(sw::main::indent("a", 2), vec!["  a"]);
-/// assert_eq!(sw::main::indent("", 2), Vec::<String>::new());
-/// ```
 pub fn indent(lines: &str, spaces: usize) -> Vec<String> {
     lines
         .lines()
@@ -154,4 +147,18 @@ fn get_removable_parts(extension: &str, file: &str) -> Vec<Program> {
     .unwrap_or_else(|e| {
         panic!("failed to parse ast-grep output for {}: {}", file, e);
     })
+}
+
+// tests
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_indent() {
+        assert_eq!(indent("a\nb", 2), vec!["  a", "  b"]);
+        assert_eq!(indent("a\nb", 0), vec!["a", "b"]);
+        assert_eq!(indent("a", 4), vec!["    a"]);
+        assert_eq!(indent("", 2), Vec::<String>::new());
+    }
 }
