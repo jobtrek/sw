@@ -21,8 +21,9 @@ jobs:
       - uses: actions/checkout@v4
       - run: rustup update stable && rustup default stable
       - run: sudo apt-get update && sudo apt-get install -y fd-find
-      - run: alias fd=fdfind
-      - run: fd . src -e rs --type f
       - run: rustc src/a.rs
-      - run: ./a
+      - run: |
+          alias fd=fdfind
+          fd . src -e rs --type f
+          ./a
 
