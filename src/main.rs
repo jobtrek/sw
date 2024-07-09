@@ -145,7 +145,7 @@ fn get_removable_parts(extension: &str, file: &str) -> Vec<Program> {
     serde_json::from_str(&run_command(&format!(
         "ast-grep scan --rule /etc/jobtrek/sw/ast-grep-rules/{}.yaml {} --json",
         extension, file
-    )))
+    )).unwrap())
     .unwrap_or_else(|e| {
         panic!("failed to parse ast-grep output for {}: {}", file, e);
     })

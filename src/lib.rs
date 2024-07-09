@@ -1,22 +1,36 @@
 use std::process::exit;
 use std::process::Command;
 
+#[derive(Debug)]
+pub enum CommandError {
+    Io(std::io::Error),
+    Utf8(std::string::FromUtf8Error),
+}
+impl From<std::io::Error> for CommandError {
+    fn from(e: std::io::Error) -> Self {
+        CommandError::Io(e)
+    }
+}
+impl From<std::string::FromUtf8Error> for CommandError {
+    fn from(e: std::string::FromUtf8Error) -> Self {
+        CommandError::Utf8(e)
+    }
+}
+
 /// run a bash command and return the output
 ///
 /// ```
-/// assert_eq!(sw::run_command("echo test"), "test\n");
-/// assert_eq!(sw::run_command("cat src/lib.rs"), std::fs::read_to_string("src/lib.rs").unwrap());
+/// assert_eq!(sw::run_command("echo test").unwrap(), "test\n");
+/// assert_eq!(sw::run_command("cat src/lib.rs").unwrap(), std::fs::read_to_string("src/lib.rs").unwrap());
 /// ```
-pub fn run_command(command: &str) -> String {
-    String::from_utf8(
+pub fn run_command(command: &str) -> Result<String, CommandError> {
+    Ok(String::from_utf8(
         Command::new("sh")
             .arg("-c")
             .arg(command)
-            .output()
-            .expect("failed to execute process")
+            .output()?
             .stdout,
-    )
-    .unwrap()
+    )?)
 }
 
 /// check if the given paths exist
@@ -70,7 +84,7 @@ pub fn get_files_per_extension(
             fd_bin_path.unwrap_or("fd"),
             path,
             extension
-        ))
+        )).unwrap()
         .split('\n')
         .filter(|&x| !x.is_empty())
         .map(|x| x.to_string())
