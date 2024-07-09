@@ -77,7 +77,7 @@ impl Extension {
 /// remove these parts from the files
 fn main() {
     let args = Args::parse();
-    check_paths_exist(&args.paths);
+    check_paths_exist(&args.paths).unwrap();
     let mut checked_files = Vec::new();
 
     for extension in args.extensions {

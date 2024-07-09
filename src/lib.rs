@@ -1,10 +1,10 @@
-use std::process::exit;
 use std::process::Command;
 
 #[derive(Debug)]
 pub enum CommandError {
     Io(std::io::Error),
     Utf8(std::string::FromUtf8Error),
+    PathsDoNotExist(Vec<String>),
 }
 impl From<std::io::Error> for CommandError {
     fn from(e: std::io::Error) -> Self {
@@ -34,30 +34,28 @@ pub fn run_command(command: &str) -> Result<String, CommandError> {
 }
 
 /// check if the given paths exist
-/// panic at the end if one of the paths does not exist, with the list of the missing paths
+/// return an error with the list of the missing paths at the end if one of the paths does not exist
 /// paths can be files or directories
 ///
 /// ```
-/// sw::check_paths_exist(&["src/lib.rs".to_string(), "..".to_string()]);
+/// sw::check_paths_exist(&["src/lib.rs".to_string(), "..".to_string()]).unwrap();
 /// ```
 /// ```rust,should_panic
-/// sw::check_paths_exist(&["not_existing.nothing".to_string()]);
+/// sw::check_paths_exist(&["not_existing.nothing".to_string()]).unwrap();
 /// ```
 /// ```rust,should_panic
-/// sw::check_paths_exist(&["src/lib.rs".to_string(), "not_existing.nothing".to_string()]);
+/// sw::check_paths_exist(&["src/lib.rs".to_string(), "not_existing.nothing".to_string()]).unwrap();
 /// ```
-pub fn check_paths_exist(paths: &[String]) {
+pub fn check_paths_exist(paths: &[String]) -> Result<(), CommandError> {
     let missing_paths = paths
         .iter()
         .filter(|&x| !std::path::Path::new(x).exists())
         .map(|x| x.to_string())
         .collect::<Vec<String>>();
     if !missing_paths.is_empty() {
-        for path in missing_paths {
-            eprintln!("path does not exist: {}", path);
-        }
-        exit(1);
+        return Err(CommandError::PathsDoNotExist(missing_paths));
     }
+    Ok(())
 }
 
 /// get the list of files with the given extension in the given path
