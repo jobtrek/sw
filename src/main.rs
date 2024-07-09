@@ -1,6 +1,6 @@
 use clap::Parser;
 use serde::{Deserialize, Serialize};
-use sw::{check_paths_exist, get_files_per_extension, run_command};
+use sw::{check_paths_exist, get_files_per_extension, run_command, CommandError};
 
 structstruck::strike! {
     /// structure of the json returned by ast-grep (only the useful parts)
@@ -94,7 +94,7 @@ fn main() {
                 if !args.silent {
                     println!("{}", file);
                 }
-                let parsed = get_removable_parts(extension, &file);
+                let parsed = get_removable_parts(extension, &file).unwrap();
                 if parsed.is_empty() {
                     // don't modyfy a file if it has nothing to remove
                     continue;
@@ -141,14 +141,11 @@ pub fn indent(lines: &str, spaces: usize) -> Vec<String> {
 }
 
 /// get the positions of the comments and block who define the part to remove
-fn get_removable_parts(extension: &str, file: &str) -> Vec<Program> {
-    serde_json::from_str(&run_command(&format!(
+fn get_removable_parts(extension: &str, file: &str) -> Result<Vec<Program>, CommandError> {
+    Ok(serde_json::from_str(&run_command(&format!(
         "ast-grep scan --rule /etc/jobtrek/sw/ast-grep-rules/{}.yaml {} --json",
         extension, file
-    )).unwrap())
-    .unwrap_or_else(|e| {
-        panic!("failed to parse ast-grep output for {}: {}", file, e);
-    })
+    ))?)?)
 }
 
 // tests

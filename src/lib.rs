@@ -5,6 +5,7 @@ pub enum CommandError {
     Io(std::io::Error),
     Utf8(std::string::FromUtf8Error),
     PathsDoNotExist(Vec<String>),
+    Json(serde_json::Error),
 }
 impl From<std::io::Error> for CommandError {
     fn from(e: std::io::Error) -> Self {
@@ -14,6 +15,11 @@ impl From<std::io::Error> for CommandError {
 impl From<std::string::FromUtf8Error> for CommandError {
     fn from(e: std::string::FromUtf8Error) -> Self {
         CommandError::Utf8(e)
+    }
+}
+impl From<serde_json::Error> for CommandError {
+    fn from(e: serde_json::Error) -> Self {
+        CommandError::Json(e)
     }
 }
 
