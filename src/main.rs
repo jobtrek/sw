@@ -142,10 +142,13 @@ pub fn indent(lines: &str, spaces: usize) -> Vec<String> {
 
 /// get the positions of the comments and block who define the part to remove
 fn get_removable_parts(extension: &str, file: &str) -> Result<Vec<Program>, CommandError> {
-    Ok(serde_json::from_str(&run_command(&format!(
+    match serde_json::from_str(&run_command(&format!(
         "ast-grep scan --rule /etc/jobtrek/sw/ast-grep-rules/{}.yaml {} --json",
         extension, file
-    ))?)?)
+    ))?) {
+        Ok(x) => Ok(x),
+        Err(e) => {Err(CommandError::AstGrepParseError(e))}
+    }
 }
 
 // tests
