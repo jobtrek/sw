@@ -1,6 +1,6 @@
 use clap::Parser;
 use serde::{Deserialize, Serialize};
-use sw::{check_paths_exist, get_files_per_extension, run_command, SwError, unwrap_sw_error};
+use sw::{check_paths_exist, get_files_per_extension, run_command, unwrap_sw_error, SwError};
 
 structstruck::strike! {
     /// structure of the json returned by ast-grep (only the useful parts)
@@ -83,7 +83,11 @@ fn main() {
     for extension in args.extensions {
         let extension = extension.as_str();
         for path in args.paths.iter() {
-            let files = unwrap_sw_error(get_files_per_extension(path, extension, args.fd_bin_path.as_deref()));
+            let files = unwrap_sw_error(get_files_per_extension(
+                path,
+                extension,
+                args.fd_bin_path.as_deref(),
+            ));
             for file in files {
                 if checked_files.contains(&file) {
                     // if a file is in multiple paths, it may be checked multiple times so we skip it
@@ -147,7 +151,7 @@ fn get_removable_parts(extension: &str, file: &str) -> Result<Vec<Program>, SwEr
         extension, file
     ))?) {
         Ok(x) => Ok(x),
-        Err(e) => {Err(SwError::AstGrepParseError(e))}
+        Err(e) => Err(SwError::AstGrepParseError(e)),
     }
 }
 

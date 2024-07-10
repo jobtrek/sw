@@ -23,7 +23,8 @@ pub fn unwrap_sw_error<T>(result: Result<T, SwError>) -> T {
     match result {
         Ok(v) => v,
         Err(e) => {
-            eprintln!("{}", 
+            eprintln!(
+                "{}",
                 match e {
                     SwError::Io(e) => e.to_string(),
                     SwError::Utf8(e) => e.to_string(),
@@ -46,11 +47,7 @@ pub fn unwrap_sw_error<T>(result: Result<T, SwError>) -> T {
 /// ```
 pub fn run_command(command: &str) -> Result<String, SwError> {
     Ok(String::from_utf8(
-        Command::new("sh")
-            .arg("-c")
-            .arg(command)
-            .output()?
-            .stdout,
+        Command::new("sh").arg("-c").arg(command).output()?.stdout,
     )?)
 }
 
