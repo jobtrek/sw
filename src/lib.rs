@@ -1,3 +1,4 @@
+use std::process::exit;
 use std::process::Command;
 
 #[derive(Debug)]
@@ -15,6 +16,25 @@ impl From<std::io::Error> for CommandError {
 impl From<std::string::FromUtf8Error> for CommandError {
     fn from(e: std::string::FromUtf8Error) -> Self {
         CommandError::Utf8(e)
+    }
+}
+
+pub fn unwrap_command_error<T>(result: Result<T, CommandError>) -> T {
+    match result {
+        Ok(v) => v,
+        Err(e) => {
+            eprintln!("{}", 
+                match e {
+                    CommandError::Io(e) => e.to_string(),
+                    CommandError::Utf8(e) => e.to_string(),
+                    CommandError::PathsDoNotExist(paths) => {
+                        format!("The following paths do not exist: {}", paths.join(", "))
+                    }
+                    CommandError::AstGrepParseError(e) => e.to_string(),
+                }
+            );
+            exit(1);
+        }
     }
 }
 

@@ -1,6 +1,6 @@
 use clap::Parser;
 use serde::{Deserialize, Serialize};
-use sw::{check_paths_exist, get_files_per_extension, run_command, CommandError};
+use sw::{check_paths_exist, get_files_per_extension, run_command, CommandError, unwrap_command_error};
 
 structstruck::strike! {
     /// structure of the json returned by ast-grep (only the useful parts)
@@ -77,13 +77,13 @@ impl Extension {
 /// remove these parts from the files
 fn main() {
     let args = Args::parse();
-    check_paths_exist(&args.paths).unwrap();
+    unwrap_command_error(check_paths_exist(&args.paths));
     let mut checked_files = Vec::new();
 
     for extension in args.extensions {
         let extension = extension.as_str();
         for path in args.paths.iter() {
-            let files = get_files_per_extension(path, extension, args.fd_bin_path.as_deref()).unwrap();
+            let files = unwrap_command_error(get_files_per_extension(path, extension, args.fd_bin_path.as_deref()));
             for file in files {
                 if checked_files.contains(&file) {
                     // if a file is in multiple paths, it may be checked multiple times so we skip it
@@ -94,7 +94,7 @@ fn main() {
                 if !args.silent {
                     println!("{}", file);
                 }
-                let parsed = get_removable_parts(extension, &file).unwrap();
+                let parsed = unwrap_command_error(get_removable_parts(extension, &file));
                 if parsed.is_empty() {
                     // don't modyfy a file if it has nothing to remove
                     continue;
