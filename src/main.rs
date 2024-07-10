@@ -1,6 +1,6 @@
 use clap::Parser;
 use serde::{Deserialize, Serialize};
-use sw::{check_paths_exist, get_files_per_extension, run_command};
+use sw::{check_paths_exist, get_files_per_extension, run_command, unwrap_sw_error, SwError};
 
 structstruck::strike! {
     /// structure of the json returned by ast-grep (only the useful parts)
@@ -77,13 +77,17 @@ impl Extension {
 /// remove these parts from the files
 fn main() {
     let args = Args::parse();
-    check_paths_exist(&args.paths);
+    unwrap_sw_error(check_paths_exist(&args.paths));
     let mut checked_files = Vec::new();
 
     for extension in args.extensions {
         let extension = extension.as_str();
         for path in args.paths.iter() {
-            let files = get_files_per_extension(path, extension, args.fd_bin_path.as_deref());
+            let files = unwrap_sw_error(get_files_per_extension(
+                path,
+                extension,
+                args.fd_bin_path.as_deref(),
+            ));
             for file in files {
                 if checked_files.contains(&file) {
                     // if a file is in multiple paths, it may be checked multiple times so we skip it
@@ -94,16 +98,15 @@ fn main() {
                 if !args.silent {
                     println!("{}", file);
                 }
-                let parsed = get_removable_parts(extension, &file);
+                let parsed = unwrap_sw_error(get_removable_parts(extension, &file));
                 if parsed.is_empty() {
                     // don't modyfy a file if it has nothing to remove
                     continue;
                 }
-                match extension {
+                unwrap_sw_error(match extension {
                     "rs" => remove_parts(&file, &parsed, "todo!()"),
                     _ => remove_parts(&file, &parsed, ""),
-                }
-                .unwrap_or_else(|e| eprintln!("failed to remove parts from {}: {}", file, e));
+                });
             }
         }
     }
@@ -111,7 +114,7 @@ fn main() {
 
 /// remove the parts of the file that are defined in the given list of programs
 /// they are removed in reverse order to avoid changing the line numbers of the area that still haven't been removed
-fn remove_parts(file: &str, area_to_remove: &[Program], replace_with: &str) -> std::io::Result<()> {
+fn remove_parts(file: &str, area_to_remove: &[Program], replace_with: &str) -> Result<(), SwError> {
     let file_content = std::fs::read_to_string(file)?;
     // convert the content of the file from a string to a vector of strings (one string per line)
     let mut file_content = file_content
@@ -141,14 +144,14 @@ pub fn indent(lines: &str, spaces: usize) -> Vec<String> {
 }
 
 /// get the positions of the comments and block who define the part to remove
-fn get_removable_parts(extension: &str, file: &str) -> Vec<Program> {
-    serde_json::from_str(&run_command(&format!(
+fn get_removable_parts(extension: &str, file: &str) -> Result<Vec<Program>, SwError> {
+    match serde_json::from_str(&run_command(&format!(
         "ast-grep scan --rule /etc/jobtrek/sw/ast-grep-rules/{}.yaml {} --json",
         extension, file
-    )))
-    .unwrap_or_else(|e| {
-        panic!("failed to parse ast-grep output for {}: {}", file, e);
-    })
+    ))?) {
+        Ok(x) => Ok(x),
+        Err(e) => Err(SwError::AstGrepParseError(e)),
+    }
 }
 
 // tests
