@@ -103,11 +103,10 @@ fn main() {
                     // don't modyfy a file if it has nothing to remove
                     continue;
                 }
-                match extension {
+                unwrap_sw_error(match extension {
                     "rs" => remove_parts(&file, &parsed, "todo!()"),
                     _ => remove_parts(&file, &parsed, ""),
-                }
-                .unwrap_or_else(|e| eprintln!("failed to remove parts from {}: {}", file, e));
+                });
             }
         }
     }
@@ -115,7 +114,7 @@ fn main() {
 
 /// remove the parts of the file that are defined in the given list of programs
 /// they are removed in reverse order to avoid changing the line numbers of the area that still haven't been removed
-fn remove_parts(file: &str, area_to_remove: &[Program], replace_with: &str) -> std::io::Result<()> {
+fn remove_parts(file: &str, area_to_remove: &[Program], replace_with: &str) -> Result<(), SwError> {
     let file_content = std::fs::read_to_string(file)?;
     // convert the content of the file from a string to a vector of strings (one string per line)
     let mut file_content = file_content
