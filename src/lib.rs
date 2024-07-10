@@ -2,35 +2,35 @@ use std::process::exit;
 use std::process::Command;
 
 #[derive(Debug)]
-pub enum CommandError {
+pub enum SwError {
     Io(std::io::Error),
     Utf8(std::string::FromUtf8Error),
     PathsDoNotExist(Vec<String>),
     AstGrepParseError(serde_json::Error),
 }
-impl From<std::io::Error> for CommandError {
+impl From<std::io::Error> for SwError {
     fn from(e: std::io::Error) -> Self {
-        CommandError::Io(e)
+        SwError::Io(e)
     }
 }
-impl From<std::string::FromUtf8Error> for CommandError {
+impl From<std::string::FromUtf8Error> for SwError {
     fn from(e: std::string::FromUtf8Error) -> Self {
-        CommandError::Utf8(e)
+        SwError::Utf8(e)
     }
 }
 
-pub fn unwrap_command_error<T>(result: Result<T, CommandError>) -> T {
+pub fn unwrap_sw_error<T>(result: Result<T, SwError>) -> T {
     match result {
         Ok(v) => v,
         Err(e) => {
             eprintln!("{}", 
                 match e {
-                    CommandError::Io(e) => e.to_string(),
-                    CommandError::Utf8(e) => e.to_string(),
-                    CommandError::PathsDoNotExist(paths) => {
+                    SwError::Io(e) => e.to_string(),
+                    SwError::Utf8(e) => e.to_string(),
+                    SwError::PathsDoNotExist(paths) => {
                         format!("The following paths do not exist: {}", paths.join(", "))
                     }
-                    CommandError::AstGrepParseError(e) => e.to_string(),
+                    SwError::AstGrepParseError(e) => e.to_string(),
                 }
             );
             exit(1);
@@ -44,7 +44,7 @@ pub fn unwrap_command_error<T>(result: Result<T, CommandError>) -> T {
 /// assert_eq!(sw::run_command("echo test").unwrap(), "test\n");
 /// assert_eq!(sw::run_command("cat src/lib.rs").unwrap(), std::fs::read_to_string("src/lib.rs").unwrap());
 /// ```
-pub fn run_command(command: &str) -> Result<String, CommandError> {
+pub fn run_command(command: &str) -> Result<String, SwError> {
     Ok(String::from_utf8(
         Command::new("sh")
             .arg("-c")
@@ -67,14 +67,14 @@ pub fn run_command(command: &str) -> Result<String, CommandError> {
 /// ```rust,should_panic
 /// sw::check_paths_exist(&["src/lib.rs".to_string(), "not_existing.nothing".to_string()]).unwrap();
 /// ```
-pub fn check_paths_exist(paths: &[String]) -> Result<(), CommandError> {
+pub fn check_paths_exist(paths: &[String]) -> Result<(), SwError> {
     let missing_paths = paths
         .iter()
         .filter(|&x| !std::path::Path::new(x).exists())
         .map(|x| x.to_string())
         .collect::<Vec<String>>();
     if !missing_paths.is_empty() {
-        return Err(CommandError::PathsDoNotExist(missing_paths));
+        return Err(SwError::PathsDoNotExist(missing_paths));
     }
     Ok(())
 }
@@ -93,7 +93,7 @@ pub fn get_files_per_extension(
     path: &str,
     extension: &str,
     fd_bin_path: Option<&str>,
-) -> Result<Vec<String>, CommandError> {
+) -> Result<Vec<String>, SwError> {
     if std::fs::metadata(path)?.is_dir() {
         return Ok(run_command(&format!(
             "{} . {} -e {} --type f",
