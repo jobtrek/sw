@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.2.0](https://github.com/jobtrek/sw/compare/v0.1.5...v0.2.0) (2024-08-12)
+
+
+### Features
+
+* upgrade error messages ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap from 4.5.8 to 4.5.15 ([#42](https://github.com/jobtrek/sw/issues/42)) ([dbf25b2](https://github.com/jobtrek/sw/commit/dbf25b25f6488ea35f7f76538157bfad55705ad9))
+* **deps:** bump serde from 1.0.203 to 1.0.204 ([#27](https://github.com/jobtrek/sw/issues/27)) ([9da3f13](https://github.com/jobtrek/sw/commit/9da3f1319a08f6e175d5d0d67a288e8481c408d0))
+* **deps:** bump serde from 1.0.204 to 1.0.206 ([#43](https://github.com/jobtrek/sw/issues/43)) ([311f920](https://github.com/jobtrek/sw/commit/311f9203eaf4786b75f4a4f4f4a76327cd0ae2a2))
+* **deps:** bump serde_json from 1.0.119 to 1.0.120 ([#26](https://github.com/jobtrek/sw/issues/26)) ([eab724c](https://github.com/jobtrek/sw/commit/eab724cc6a10f8aeb8359c56fd05a087d89b8dc8))
+* **deps:** bump serde_json from 1.0.120 to 1.0.122 ([#40](https://github.com/jobtrek/sw/issues/40)) ([34cb1cc](https://github.com/jobtrek/sw/commit/34cb1cc3b1f95a01e9d050c03a7f9b0618fcb8ab))
+* remove prerelease from release please config ([#34](https://github.com/jobtrek/sw/issues/34)) ([6205fd8](https://github.com/jobtrek/sw/commit/6205fd878a6807186f2b1172d3da2482430abc35))
+
+
+### Refactors
+
+* addapt check_paths_exist function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* addapt get_files_per_extension function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* addapt get_removable_parts function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* addapt remove_parts function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* addapt run_command function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* update ast grep parse error to be a more precise type ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* use Result to handle errors instead of panic, unwrap, expect and exit ([#35](https://github.com/jobtrek/sw/issues/35)) ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+
 ## [0.1.5](https://github.com/jobtrek/sw/compare/v0.1.4...v0.1.5) (2024-07-03)
 
 
