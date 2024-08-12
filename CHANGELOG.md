@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.1](https://github.com/jobtrek/sw/compare/v0.2.0...v0.2.1) (2024-08-12)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump rust in the docker-minor group ([#47](https://github.com/jobtrek/sw/issues/47)) ([21c0586](https://github.com/jobtrek/sw/commit/21c0586568f548aa42109d32300d2c8484038e6f))
+* **deps:** bump serde_json from 1.0.122 to 1.0.124 ([#46](https://github.com/jobtrek/sw/issues/46)) ([90f82a5](https://github.com/jobtrek/sw/commit/90f82a5e1dbfca6db78e46f210da884ce8a60d9a))
+
+
+### Continuous Integration
+
+* add docker to dependabot ([#44](https://github.com/jobtrek/sw/issues/44)) ([5b6c5df](https://github.com/jobtrek/sw/commit/5b6c5dfb973029206a7e4a83a39d0e3d8b3cfc36))
+
 ## [0.2.0](https://github.com/jobtrek/sw/compare/v0.1.5...v0.2.0) (2024-08-12)
 
 
