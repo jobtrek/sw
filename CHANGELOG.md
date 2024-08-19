@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.2](https://github.com/jobtrek/sw/compare/v0.2.1...v0.2.2) (2024-08-19)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap from 4.5.15 to 4.5.16 ([#50](https://github.com/jobtrek/sw/issues/50)) ([2ff478a](https://github.com/jobtrek/sw/commit/2ff478a926d119b2d5295732ae8de85566e8e945))
+* **deps:** bump serde from 1.0.206 to 1.0.208 ([#49](https://github.com/jobtrek/sw/issues/49)) ([53f16fc](https://github.com/jobtrek/sw/commit/53f16fcf3f92d41a21352f7bc4879743155530ea))
+* **deps:** bump serde_json from 1.0.124 to 1.0.125 ([#48](https://github.com/jobtrek/sw/issues/48)) ([42a8d51](https://github.com/jobtrek/sw/commit/42a8d51bc27ce3fcfe4a6976bd3e1dd48476c1e2))
+
 ## [0.2.1](https://github.com/jobtrek/sw/compare/v0.2.0...v0.2.1) (2024-08-12)
 
 
