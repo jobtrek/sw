@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.5](https://github.com/jobtrek/sw/compare/v0.2.4...v0.2.5) (2024-09-25)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap from 4.5.17 to 4.5.18 ([#60](https://github.com/jobtrek/sw/issues/60)) ([91c47ee](https://github.com/jobtrek/sw/commit/91c47ee13e2d2dfb16adbcd3a60f8cc5bbdf3354))
+
 ## [0.2.4](https://github.com/jobtrek/sw/compare/v0.2.3...v0.2.4) (2024-09-12)
 
 
