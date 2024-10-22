@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.6](https://github.com/jobtrek/sw/compare/v0.2.5...v0.2.6) (2024-10-22)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap from 4.5.18 to 4.5.20 ([#63](https://github.com/jobtrek/sw/issues/63)) ([4093294](https://github.com/jobtrek/sw/commit/409329481df78c69e581e554602c005a962acc95))
+* **deps:** bump rust in the docker-minor group ([#65](https://github.com/jobtrek/sw/issues/65)) ([a809c5e](https://github.com/jobtrek/sw/commit/a809c5e70306ad4fd47def9dd0730e671f7c6312))
+* **deps:** bump serde_json from 1.0.128 to 1.0.132 ([#64](https://github.com/jobtrek/sw/issues/64)) ([9f37361](https://github.com/jobtrek/sw/commit/9f373615f8c3019e74df0d1f1237bbca8f6e91ca))
+
 ## [0.2.5](https://github.com/jobtrek/sw/compare/v0.2.4...v0.2.5) (2024-09-25)
 
 
