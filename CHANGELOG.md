@@ -1,5 +1,100 @@
 # Changelog
 
+## [0.2.7](https://github.com/jobtrek/sw/compare/v0.2.6...v0.2.7) (2024-11-19)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap from 4.5.20 to 4.5.21 ([#72](https://github.com/jobtrek/sw/issues/72)) ([67c5f96](https://github.com/jobtrek/sw/commit/67c5f963fd8cd5dab43eb0ecd52a22f46662bab6))
+* **deps:** bump serde from 1.0.210 to 1.0.213 ([#67](https://github.com/jobtrek/sw/issues/67)) ([817b6e0](https://github.com/jobtrek/sw/commit/817b6e0604086d186fa48b0795fa4e03d47a21d6))
+* **deps:** bump serde from 1.0.213 to 1.0.214 ([#69](https://github.com/jobtrek/sw/issues/69)) ([847e8a0](https://github.com/jobtrek/sw/commit/847e8a0f00483a277f2a771f63aae4201afab26b))
+* **deps:** bump serde from 1.0.214 to 1.0.215 ([#71](https://github.com/jobtrek/sw/issues/71)) ([0f464e0](https://github.com/jobtrek/sw/commit/0f464e082ee196685c3e703fca1802eb7596dc7d))
+* **deps:** bump serde_json from 1.0.132 to 1.0.133 ([#70](https://github.com/jobtrek/sw/issues/70)) ([4788301](https://github.com/jobtrek/sw/commit/4788301ac854b291364a8abb25910e27c5fd94bd))
+
+## [0.2.6](https://github.com/jobtrek/sw/compare/v0.2.5...v0.2.6) (2024-10-22)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap from 4.5.18 to 4.5.20 ([#63](https://github.com/jobtrek/sw/issues/63)) ([4093294](https://github.com/jobtrek/sw/commit/409329481df78c69e581e554602c005a962acc95))
+* **deps:** bump rust in the docker-minor group ([#65](https://github.com/jobtrek/sw/issues/65)) ([a809c5e](https://github.com/jobtrek/sw/commit/a809c5e70306ad4fd47def9dd0730e671f7c6312))
+* **deps:** bump serde_json from 1.0.128 to 1.0.132 ([#64](https://github.com/jobtrek/sw/issues/64)) ([9f37361](https://github.com/jobtrek/sw/commit/9f373615f8c3019e74df0d1f1237bbca8f6e91ca))
+
+## [0.2.5](https://github.com/jobtrek/sw/compare/v0.2.4...v0.2.5) (2024-09-25)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap from 4.5.17 to 4.5.18 ([#60](https://github.com/jobtrek/sw/issues/60)) ([91c47ee](https://github.com/jobtrek/sw/commit/91c47ee13e2d2dfb16adbcd3a60f8cc5bbdf3354))
+
+## [0.2.4](https://github.com/jobtrek/sw/compare/v0.2.3...v0.2.4) (2024-09-12)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap from 4.5.16 to 4.5.17 ([#55](https://github.com/jobtrek/sw/issues/55)) ([b1e1961](https://github.com/jobtrek/sw/commit/b1e196133222845702a7f0510a8486d6e488e7cf))
+* **deps:** bump rust in the docker-minor group ([#58](https://github.com/jobtrek/sw/issues/58)) ([c4046f0](https://github.com/jobtrek/sw/commit/c4046f0b70b6a1ffd698f4d0ea2eed2594adb3c5))
+* **deps:** bump serde from 1.0.209 to 1.0.210 ([#57](https://github.com/jobtrek/sw/issues/57)) ([fa52731](https://github.com/jobtrek/sw/commit/fa527316165756ebbfa0da4315814acf7e122da6))
+* **deps:** bump serde_json from 1.0.127 to 1.0.128 ([#56](https://github.com/jobtrek/sw/issues/56)) ([c5ea8b5](https://github.com/jobtrek/sw/commit/c5ea8b544e2a5899dda356981983d220f0c93bc4))
+
+## [0.2.3](https://github.com/jobtrek/sw/compare/v0.2.2...v0.2.3) (2024-08-28)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump serde from 1.0.208 to 1.0.209 ([#52](https://github.com/jobtrek/sw/issues/52)) ([2680c42](https://github.com/jobtrek/sw/commit/2680c420485614367cb6f89dd98d16ddd59fb4c2))
+* **deps:** bump serde_json from 1.0.125 to 1.0.127 ([#53](https://github.com/jobtrek/sw/issues/53)) ([c3a5753](https://github.com/jobtrek/sw/commit/c3a57530f35e0f2591c4f96d8c0e3949a301bb1b))
+
+## [0.2.2](https://github.com/jobtrek/sw/compare/v0.2.1...v0.2.2) (2024-08-19)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap from 4.5.15 to 4.5.16 ([#50](https://github.com/jobtrek/sw/issues/50)) ([2ff478a](https://github.com/jobtrek/sw/commit/2ff478a926d119b2d5295732ae8de85566e8e945))
+* **deps:** bump serde from 1.0.206 to 1.0.208 ([#49](https://github.com/jobtrek/sw/issues/49)) ([53f16fc](https://github.com/jobtrek/sw/commit/53f16fcf3f92d41a21352f7bc4879743155530ea))
+* **deps:** bump serde_json from 1.0.124 to 1.0.125 ([#48](https://github.com/jobtrek/sw/issues/48)) ([42a8d51](https://github.com/jobtrek/sw/commit/42a8d51bc27ce3fcfe4a6976bd3e1dd48476c1e2))
+
+## [0.2.1](https://github.com/jobtrek/sw/compare/v0.2.0...v0.2.1) (2024-08-12)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump rust in the docker-minor group ([#47](https://github.com/jobtrek/sw/issues/47)) ([21c0586](https://github.com/jobtrek/sw/commit/21c0586568f548aa42109d32300d2c8484038e6f))
+* **deps:** bump serde_json from 1.0.122 to 1.0.124 ([#46](https://github.com/jobtrek/sw/issues/46)) ([90f82a5](https://github.com/jobtrek/sw/commit/90f82a5e1dbfca6db78e46f210da884ce8a60d9a))
+
+
+### Continuous Integration
+
+* add docker to dependabot ([#44](https://github.com/jobtrek/sw/issues/44)) ([5b6c5df](https://github.com/jobtrek/sw/commit/5b6c5dfb973029206a7e4a83a39d0e3d8b3cfc36))
+
+## [0.2.0](https://github.com/jobtrek/sw/compare/v0.1.5...v0.2.0) (2024-08-12)
+
+
+### Features
+
+* upgrade error messages ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap from 4.5.8 to 4.5.15 ([#42](https://github.com/jobtrek/sw/issues/42)) ([dbf25b2](https://github.com/jobtrek/sw/commit/dbf25b25f6488ea35f7f76538157bfad55705ad9))
+* **deps:** bump serde from 1.0.203 to 1.0.204 ([#27](https://github.com/jobtrek/sw/issues/27)) ([9da3f13](https://github.com/jobtrek/sw/commit/9da3f1319a08f6e175d5d0d67a288e8481c408d0))
+* **deps:** bump serde from 1.0.204 to 1.0.206 ([#43](https://github.com/jobtrek/sw/issues/43)) ([311f920](https://github.com/jobtrek/sw/commit/311f9203eaf4786b75f4a4f4f4a76327cd0ae2a2))
+* **deps:** bump serde_json from 1.0.119 to 1.0.120 ([#26](https://github.com/jobtrek/sw/issues/26)) ([eab724c](https://github.com/jobtrek/sw/commit/eab724cc6a10f8aeb8359c56fd05a087d89b8dc8))
+* **deps:** bump serde_json from 1.0.120 to 1.0.122 ([#40](https://github.com/jobtrek/sw/issues/40)) ([34cb1cc](https://github.com/jobtrek/sw/commit/34cb1cc3b1f95a01e9d050c03a7f9b0618fcb8ab))
+* remove prerelease from release please config ([#34](https://github.com/jobtrek/sw/issues/34)) ([6205fd8](https://github.com/jobtrek/sw/commit/6205fd878a6807186f2b1172d3da2482430abc35))
+
+
+### Refactors
+
+* addapt check_paths_exist function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* addapt get_files_per_extension function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* addapt get_removable_parts function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* addapt remove_parts function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* addapt run_command function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* update ast grep parse error to be a more precise type ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* use Result to handle errors instead of panic, unwrap, expect and exit ([#35](https://github.com/jobtrek/sw/issues/35)) ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+
 ## [0.1.5](https://github.com/jobtrek/sw/compare/v0.1.4...v0.1.5) (2024-07-03)
 
 
