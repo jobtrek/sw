@@ -1,4 +1,4 @@
-FROM rust:1.82-alpine
+FROM rust:1.83-alpine
 WORKDIR /etc/jobtrek/sw
 
 # Install the dependencies
@@ -16,7 +16,7 @@ COPY src src
 RUN cargo build --release
 
 # Final image
-FROM alpine:3.20
+FROM alpine:3.21
 COPY --from=0 /etc/jobtrek/sw/target/release/sw /usr/local/bin/sw
 COPY --from=0 /etc/jobtrek/sw/sgconfig.yml /etc/jobtrek/sw/sgconfig.yml
 COPY --from=0 /etc/jobtrek/sw/ast-grep-rules /etc/jobtrek/sw/ast-grep-rules
