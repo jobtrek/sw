@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.0](https://github.com/jobtrek/sw/compare/v0.2.7...v0.3.0) (2024-12-10)
+
+
+### Features
+
+* add php language ([#33](https://github.com/jobtrek/sw/issues/33)) ([b00b595](https://github.com/jobtrek/sw/commit/b00b5952310f004e099656d8b3ebd924bc63c837))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap from 4.5.21 to 4.5.23 ([#76](https://github.com/jobtrek/sw/issues/76)) ([2df72f5](https://github.com/jobtrek/sw/commit/2df72f5762e7442c39909c479bf4c88dc972a88c))
+* **deps:** bump the docker-minor group with 2 updates ([#75](https://github.com/jobtrek/sw/issues/75)) ([1549224](https://github.com/jobtrek/sw/commit/1549224f9c4f3aaaa608c4369bf5952acdbb4cbb))
+
 ## [0.2.7](https://github.com/jobtrek/sw/compare/v0.2.6...v0.2.7) (2024-11-19)
 
 
