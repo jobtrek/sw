@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/jobtrek/sw/compare/v0.3.0...v0.3.1) (2024-12-20)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump serde from 1.0.215 to 1.0.216 ([#77](https://github.com/jobtrek/sw/issues/77)) ([fa1a85c](https://github.com/jobtrek/sw/commit/fa1a85c2662a9c1b9177d3c99e687bdf4e0cc89c))
+
 ## [0.3.0](https://github.com/jobtrek/sw/compare/v0.2.7...v0.3.0) (2024-12-10)
 
 
