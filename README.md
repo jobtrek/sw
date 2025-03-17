@@ -12,9 +12,9 @@ Sw is a simple tool that searches some specified comments in a codebase.
 Then, he removes the content of the surrounding scope.
 
 SW uses :
+
 - [fd](https://github.com/sharkdp/fd) to select the code files we want to search for solutions to wipe.
-- [ast-grep](https://github.com/ast-grep/ast-grep) to find patterns in comments with abstract syntax tree.
-- Remove the code next to the comment and in the same code scope with simple rust.
+- Remove the code betwwen lines containing à `--sw-wipe--` keyword inclusive.
 
 ### Defaults
 
@@ -26,10 +26,8 @@ SW uses :
   - JavaScript : `.js`
   - TypeScript : `.ts`
   - Java : `.java`
-- Wipe the characters between a line or block comment marching `Your code goes here` to the end of the code scope containing the comment. *If your comment is on the first line of a function, it will wipe the function body.*
+- Wipe the characters between lines containing `--sw-wipe--`.
 
-### Configure
+### Usage
 
-Arguments available :
-
-!TODO
+See `sw --help`
