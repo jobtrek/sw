@@ -1,5 +1,6 @@
 use clap::Parser;
 use sw::{check_paths_exist, get_files_per_extension, unwrap_sw_error};
+use rayon::prelude::*;
 
 /// structure of the clap arguments
 /// sw [path = "."]
@@ -50,7 +51,6 @@ impl Extension {
 fn main() {
     let args = Args::parse();
     unwrap_sw_error(check_paths_exist(&args.paths));
-    let mut checked_files = Vec::new();
 
     for extension in args.extensions {
         let extension = extension.as_str();
@@ -60,24 +60,18 @@ fn main() {
                 extension,
                 args.fd_bin_path.as_deref(),
             ));
-            for file in files {
-                if checked_files.contains(&file) {
-                    // if a file is in multiple paths, it may be checked multiple times so we skip it
-                    continue;
-                }
-                checked_files.push(file.clone());
-
+            files.par_iter().for_each(|file| {
                 if !args.silent {
                     println!("Replacing in {}", file);
                 }
 
-                let file_content = std::fs::read_to_string(&file).expect("Cannot read file");
+                let file_content = std::fs::read_to_string(file).expect("Cannot read file");
 
                 std::fs::write(file, match extension {
-                    "rs" => remove_parts(&file_content, &args.matcher, "todo!()"),
+                    "rs" => remove_parts(&file_content, &args.matcher, "todo!();"),
                     _ => remove_parts(&file_content, &args.matcher, ""),
                 }).expect("Cannot write file");
-            }
+            });
         }
     }
 }
@@ -93,17 +87,22 @@ fn remove_parts(file_content: &str, matcher: &str, replace_with: &str) -> String
     
     // iterate through all lines in reverse and remove all lines between lines that contains matcher
     let mut remove = false;
-    let wiped_file: Vec<&str> = file_content.iter().filter_map(|line| {
+    let wiped_file: Vec<String> = file_content.iter().filter_map(|line| {
         if line.contains(matcher) {
             remove = !remove;
-            if !remove {
-                return Some(replace_with)
+            // In the cas there is a replacer, we return it if we are at de end of a removal
+            if !remove && !replace_with.is_empty() {
+                // Get number of spaces at the beginning of the line
+                let spaces = line.chars().take_while(|&c| c == ' ').count();
+                // Return the replacer with the same number of spaces
+                return Some(format!("{}{}", " ".repeat(spaces), replace_with));
             }
+            return None;
         }
         if remove {
-            return None
+            return None;
         }
-        Some(line)
+        Some(line.to_string())
     }).collect();
     wiped_file.join("\n")
 }
