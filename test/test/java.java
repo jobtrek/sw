@@ -2,9 +2,12 @@ public clas Test {
     public static List<Token> tokenize(String input) {
         // Write your code here
         int i = 0;
+        // --sw-wipe--
         List<Token> tokens = new ArrayList<>();
+        // --sw-wipe--
         while (i < input.length()) {
             char c = input.charAt(i);
+            // --sw-wipe--
             if (Character.isDigit(c)) {
                 int j = i;
                 while (j < input.length() && Character.isDigit(input.charAt(j))) {
@@ -31,6 +34,7 @@ public clas Test {
             } else {
                 i++;
             }
+            // --sw-wipe--
         }
         return tokens;
     }
