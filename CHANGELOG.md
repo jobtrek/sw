@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.4.0](https://github.com/jobtrek/sw/compare/v0.3.8...v0.4.0) (2025-03-18)
+
+
+### Features
+
+* new wipe based ont token ([#105](https://github.com/jobtrek/sw/issues/105)) ([7ccc70c](https://github.com/jobtrek/sw/commit/7ccc70c010d0ef01165c71fa6814c3ffde99835a))
+
+
+### Tests
+
+* update test files to new wipe token ([7ccc70c](https://github.com/jobtrek/sw/commit/7ccc70c010d0ef01165c71fa6814c3ffde99835a))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap from 4.5.31 to 4.5.32 ([#104](https://github.com/jobtrek/sw/issues/104)) ([b6e33e6](https://github.com/jobtrek/sw/commit/b6e33e6a36f36cd882fa06fa2da614bafd6bc434))
+* **deps:** bump serde from 1.0.218 to 1.0.219 ([#102](https://github.com/jobtrek/sw/issues/102)) ([00ba384](https://github.com/jobtrek/sw/commit/00ba38491591bcc713cacd44cdf1f4b9fea6ce20))
+
+
+### Refactors
+
+* use rayon for parallel file wipe ([7ccc70c](https://github.com/jobtrek/sw/commit/7ccc70c010d0ef01165c71fa6814c3ffde99835a))
+
+
+### Build System
+
+* remove ast-grep in dockerfile ([7ccc70c](https://github.com/jobtrek/sw/commit/7ccc70c010d0ef01165c71fa6814c3ffde99835a))
+
 ## [0.3.8](https://github.com/jobtrek/sw/compare/v0.3.7...v0.3.8) (2025-03-04)
 
 
