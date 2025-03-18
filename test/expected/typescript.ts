@@ -4,6 +4,9 @@
  */
 export function computeAverage(grades) {
     // Write your code here
+    let sum = grades
+
+    return sum / grades.length
 }
 
 export function first2OrThird(first, second, third) {
