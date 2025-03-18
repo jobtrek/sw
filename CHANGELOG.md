@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/jobtrek/sw/compare/v0.4.0...v0.4.1) (2025-03-18)
+
+
+### Tests
+
+* patch output files ([#106](https://github.com/jobtrek/sw/issues/106)) ([9a7ac1a](https://github.com/jobtrek/sw/commit/9a7ac1a92f8a566cce64ac932458616ea93090fc))
+
 ## [0.4.0](https://github.com/jobtrek/sw/compare/v0.3.8...v0.4.0) (2025-03-18)
 
 
