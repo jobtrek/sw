@@ -5,6 +5,7 @@
 export function computeAverage(grades) {
     // Write your code here
     let sum = grades
+        // --sw-wipe--
         .map((n) => {
             if (n !== "number" {
                 throw new Error(
@@ -14,6 +15,7 @@ export function computeAverage(grades) {
             return n
         })
         .reduce((acc, n) => acc + n)
+        // --sw-wipe--
 
     return sum / grades.length
 }
@@ -23,6 +25,8 @@ export function first2OrThird(first, second, third) {
      * Add boolean operators between the inputs to make the test pass, keep the parameters in the same order as the function signature
      * Write your logic here
      */
+    // --sw-wipe--
     return first && second || third
+    // --sw-wipe--
 }
 

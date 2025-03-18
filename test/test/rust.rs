@@ -9,9 +9,11 @@ pub fn first2_or_third(first: bool, second: bool, third: bool) -> bool {
 pub enum Shape {
     Circle {
         // Write your logic here
+        // --sw-wipe--
         center_x: f32,
         center_y: f32,
         radius: f32,
+        // --sw-wipe--
     },
     Rectangle {
         // Write your logic here
@@ -24,8 +26,10 @@ pub enum Shape {
 
 pub struct Token {
     // Write your logic here
+    // --sw-wipe--
     pub token_type: TokenType,
     pub value: String,
+    // --sw-wipe--
 }
 
 /// Greet the person referred to in the `text` parameter.
@@ -47,6 +51,7 @@ pub fn tokenize(input: String) -> Vec<Token> {
     while i < input.len() {
         let mut current_token = String::new();
         let c = input.chars().nth(i).unwrap();
+        // --sw-wipe--
         tokens.push(match c {
             '"' => {
                 i += 1;
@@ -92,6 +97,7 @@ pub fn tokenize(input: String) -> Vec<Token> {
                 panic!("Invalid character: {}", c);
             }
         });
+        // --sw-wipe--
         i += 1;
     }
     tokens
