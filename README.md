@@ -1,6 +1,6 @@
 # SW
 
-**v0.4.4 :** [Read changelog](./CHANGELOG.md) <!-- x-release-please-version -->
+**v0.4.5 :** [Read changelog](./CHANGELOG.md) <!-- x-release-please-version -->
 
 > A little solution wiper. Search code scopes containing a matching comment and wipe the content of the scope.
 >
