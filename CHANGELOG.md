@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.6](https://github.com/jobtrek/sw/compare/v0.4.5...v0.4.6) (2025-05-19)
+
+
+### Miscellaneous Chores
+
+* update to rust 1.87 and deps bump minors ([#120](https://github.com/jobtrek/sw/issues/120)) ([8300860](https://github.com/jobtrek/sw/commit/830086073da45ebab5012489e5be2ac517878ec9))
+
 ## [0.4.5](https://github.com/jobtrek/sw/compare/v0.4.4...v0.4.5) (2025-05-13)
 
 
