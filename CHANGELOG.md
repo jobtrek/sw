@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.7](https://github.com/jobtrek/sw/compare/v0.4.6...v0.4.7) (2025-06-02)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump alpine from 3.21 to 3.22 in the docker-minor group ([#122](https://github.com/jobtrek/sw/issues/122)) ([ac47908](https://github.com/jobtrek/sw/commit/ac47908c84da4be22eeef26102059ed7fad7c669))
+* **deps:** bump clap from 4.5.38 to 4.5.39 ([#123](https://github.com/jobtrek/sw/issues/123)) ([7c46994](https://github.com/jobtrek/sw/commit/7c46994d60e95faaafd2011f84d1a23fdbcdfb21))
+
 ## [0.4.6](https://github.com/jobtrek/sw/compare/v0.4.5...v0.4.6) (2025-05-19)
 
 
