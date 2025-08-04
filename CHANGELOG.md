@@ -1,5 +1,198 @@
 # Changelog
 
+## [0.4.10](https://github.com/jobtrek/sw/compare/v0.4.9...v0.4.10) (2025-08-04)
+
+
+### Features
+
+* add command line arguments ([6611550](https://github.com/jobtrek/sw/commit/66115502b4d35dea8caf722a6f98084ecc81e84f))
+* add files with the expectated result of the tests ([#20](https://github.com/jobtrek/sw/issues/20)) ([63b2457](https://github.com/jobtrek/sw/commit/63b24575cea23b3f6d9718368867ee050096534c))
+* add java language ([#24](https://github.com/jobtrek/sw/issues/24)) ([0266bd9](https://github.com/jobtrek/sw/commit/0266bd92947cc3b885a7fe3d57bfa29f10ebf02d))
+* add php language ([#33](https://github.com/jobtrek/sw/issues/33)) ([b00b595](https://github.com/jobtrek/sw/commit/b00b5952310f004e099656d8b3ebd924bc63c837))
+* add support for the Javascript language ([#12](https://github.com/jobtrek/sw/issues/12)) ([9559804](https://github.com/jobtrek/sw/commit/955980448b8b22d9d49969f05dd03d38311529be))
+* add test expectation files ([63b2457](https://github.com/jobtrek/sw/commit/63b24575cea23b3f6d9718368867ee050096534c))
+* add toto!() macro to each functions ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* add typescript ([#17](https://github.com/jobtrek/sw/issues/17)) ([fca07e0](https://github.com/jobtrek/sw/commit/fca07e0afa006bbed1d9f68b093cf880b9bb84f3))
+* allow user to chose the file type ([6611550](https://github.com/jobtrek/sw/commit/66115502b4d35dea8caf722a6f98084ecc81e84f))
+* allow user to chose to disable feedback ([6611550](https://github.com/jobtrek/sw/commit/66115502b4d35dea8caf722a6f98084ecc81e84f))
+* create a developement version of the dockerfile ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* ensure that the given extensions are all valid ([9559804](https://github.com/jobtrek/sw/commit/955980448b8b22d9d49969f05dd03d38311529be))
+* get the lines number of the lines to remove ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* get the list of files ending with an extension in a path ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* indent replacing text according to the comment's indentation ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* new wipe based ont token ([#105](https://github.com/jobtrek/sw/issues/105)) ([7ccc70c](https://github.com/jobtrek/sw/commit/7ccc70c010d0ef01165c71fa6814c3ffde99835a))
+* only write "todo!()" when working with rust files ([9559804](https://github.com/jobtrek/sw/commit/955980448b8b22d9d49969f05dd03d38311529be))
+* parse json output from ast-grep ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* remove code after comments in rust ([#8](https://github.com/jobtrek/sw/issues/8)) ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* remove the wanted code from the file ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* support javascript files ([9559804](https://github.com/jobtrek/sw/commit/955980448b8b22d9d49969f05dd03d38311529be))
+* update dockerfile ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* upgrade error messages ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* upgrade path selection ([#22](https://github.com/jobtrek/sw/issues/22)) ([e421db0](https://github.com/jobtrek/sw/commit/e421db002b35470ad7f795c796675e4f94fc942b))
+* use ast-grep to get block with wanted comment ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* use clap to chose path to run sw from ([6611550](https://github.com/jobtrek/sw/commit/66115502b4d35dea8caf722a6f98084ecc81e84f))
+
+
+### Bug Fixes
+
+* select definition scope with the other scopes ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+
+
+### Tests
+
+* add the most relevent test done to the project files ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* patch output files ([#106](https://github.com/jobtrek/sw/issues/106)) ([9a7ac1a](https://github.com/jobtrek/sw/commit/9a7ac1a92f8a566cce64ac932458616ea93090fc))
+* update test files to new wipe token ([7ccc70c](https://github.com/jobtrek/sw/commit/7ccc70c010d0ef01165c71fa6814c3ffde99835a))
+
+
+### Performance Improvements
+
+* make get_files and run_command 1 line long ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* remove variable to querry data directly when usefull ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+
+
+### Miscellaneous Chores
+
+* .idea folder in gitignore ([b2fc4dc](https://github.com/jobtrek/sw/commit/b2fc4dc62df7f0701b2d551b2d8969905cb5c873))
+* add license ([#15](https://github.com/jobtrek/sw/issues/15)) ([379f21e](https://github.com/jobtrek/sw/commit/379f21eb44db847eda9aeec7abbef1ba976de936))
+* cargo initialisation ([6c152b5](https://github.com/jobtrek/sw/commit/6c152b5c078f87f521fd83e076ca537b9b88ecce))
+* **deps:** bump alpine from 3.21 to 3.22 in the docker-minor group ([#122](https://github.com/jobtrek/sw/issues/122)) ([ac47908](https://github.com/jobtrek/sw/commit/ac47908c84da4be22eeef26102059ed7fad7c669))
+* **deps:** bump clap from 4.5.15 to 4.5.16 ([#50](https://github.com/jobtrek/sw/issues/50)) ([2ff478a](https://github.com/jobtrek/sw/commit/2ff478a926d119b2d5295732ae8de85566e8e945))
+* **deps:** bump clap from 4.5.16 to 4.5.17 ([#55](https://github.com/jobtrek/sw/issues/55)) ([b1e1961](https://github.com/jobtrek/sw/commit/b1e196133222845702a7f0510a8486d6e488e7cf))
+* **deps:** bump clap from 4.5.17 to 4.5.18 ([#60](https://github.com/jobtrek/sw/issues/60)) ([91c47ee](https://github.com/jobtrek/sw/commit/91c47ee13e2d2dfb16adbcd3a60f8cc5bbdf3354))
+* **deps:** bump clap from 4.5.18 to 4.5.20 ([#63](https://github.com/jobtrek/sw/issues/63)) ([4093294](https://github.com/jobtrek/sw/commit/409329481df78c69e581e554602c005a962acc95))
+* **deps:** bump clap from 4.5.20 to 4.5.21 ([#72](https://github.com/jobtrek/sw/issues/72)) ([67c5f96](https://github.com/jobtrek/sw/commit/67c5f963fd8cd5dab43eb0ecd52a22f46662bab6))
+* **deps:** bump clap from 4.5.21 to 4.5.23 ([#76](https://github.com/jobtrek/sw/issues/76)) ([2df72f5](https://github.com/jobtrek/sw/commit/2df72f5762e7442c39909c479bf4c88dc972a88c))
+* **deps:** bump clap from 4.5.23 to 4.5.26 ([#82](https://github.com/jobtrek/sw/issues/82)) ([91de810](https://github.com/jobtrek/sw/commit/91de810ab370b68ec63998b5115685240b353791))
+* **deps:** bump clap from 4.5.26 to 4.5.27 ([#87](https://github.com/jobtrek/sw/issues/87)) ([89ed616](https://github.com/jobtrek/sw/commit/89ed6163884a9bdc9ae3c038e66873aa65892155))
+* **deps:** bump clap from 4.5.27 to 4.5.28 ([#90](https://github.com/jobtrek/sw/issues/90)) ([43cb733](https://github.com/jobtrek/sw/commit/43cb733ab5bcbf28a6ff965a4421faee3646b07d))
+* **deps:** bump clap from 4.5.28 to 4.5.29 ([#92](https://github.com/jobtrek/sw/issues/92)) ([7e3a43b](https://github.com/jobtrek/sw/commit/7e3a43ba2d90ae6752408de9601aa9042bf273c1))
+* **deps:** bump clap from 4.5.29 to 4.5.31 ([#99](https://github.com/jobtrek/sw/issues/99)) ([317c211](https://github.com/jobtrek/sw/commit/317c211bf8577fadf747076375cc6952095b3150))
+* **deps:** bump clap from 4.5.31 to 4.5.32 ([#104](https://github.com/jobtrek/sw/issues/104)) ([b6e33e6](https://github.com/jobtrek/sw/commit/b6e33e6a36f36cd882fa06fa2da614bafd6bc434))
+* **deps:** bump clap from 4.5.32 to 4.5.34 ([#109](https://github.com/jobtrek/sw/issues/109)) ([d4efbf4](https://github.com/jobtrek/sw/commit/d4efbf4737bb468449fa7af8ea5d766442534a2a))
+* **deps:** bump clap from 4.5.35 to 4.5.36 ([#115](https://github.com/jobtrek/sw/issues/115)) ([7c5200a](https://github.com/jobtrek/sw/commit/7c5200a1fe6f0335ce241628eedb80e79a94ceb2))
+* **deps:** bump clap from 4.5.36 to 4.5.38 ([#118](https://github.com/jobtrek/sw/issues/118)) ([c8f14db](https://github.com/jobtrek/sw/commit/c8f14dbf2d0ff22ff727b69a5549daac562aa2c9))
+* **deps:** bump clap from 4.5.38 to 4.5.39 ([#123](https://github.com/jobtrek/sw/issues/123)) ([7c46994](https://github.com/jobtrek/sw/commit/7c46994d60e95faaafd2011f84d1a23fdbcdfb21))
+* **deps:** bump clap from 4.5.39 to 4.5.40 ([#125](https://github.com/jobtrek/sw/issues/125)) ([d308f6d](https://github.com/jobtrek/sw/commit/d308f6d75edc2739040b7d98b60fafb0f687697b))
+* **deps:** bump clap from 4.5.40 to 4.5.41 ([#130](https://github.com/jobtrek/sw/issues/130)) ([90e5276](https://github.com/jobtrek/sw/commit/90e52760599a6835e97d591ca3f49703378af8dd))
+* **deps:** bump clap from 4.5.7 to 4.5.8 ([#18](https://github.com/jobtrek/sw/issues/18)) ([6c344cb](https://github.com/jobtrek/sw/commit/6c344cb93846815f52e3d3b0d57e4ed5f1fc3703))
+* **deps:** bump clap from 4.5.8 to 4.5.15 ([#42](https://github.com/jobtrek/sw/issues/42)) ([dbf25b2](https://github.com/jobtrek/sw/commit/dbf25b25f6488ea35f7f76538157bfad55705ad9))
+* **deps:** bump rust in the docker-minor group ([#112](https://github.com/jobtrek/sw/issues/112)) ([20afad3](https://github.com/jobtrek/sw/commit/20afad3be30c9177e2392233516b65bc8b81c355))
+* **deps:** bump rust in the docker-minor group ([#127](https://github.com/jobtrek/sw/issues/127)) ([381b93a](https://github.com/jobtrek/sw/commit/381b93ab236a006e2d0f045461c7490121b09ae5))
+* **deps:** bump rust in the docker-minor group ([#47](https://github.com/jobtrek/sw/issues/47)) ([21c0586](https://github.com/jobtrek/sw/commit/21c0586568f548aa42109d32300d2c8484038e6f))
+* **deps:** bump rust in the docker-minor group ([#58](https://github.com/jobtrek/sw/issues/58)) ([c4046f0](https://github.com/jobtrek/sw/commit/c4046f0b70b6a1ffd698f4d0ea2eed2594adb3c5))
+* **deps:** bump rust in the docker-minor group ([#65](https://github.com/jobtrek/sw/issues/65)) ([a809c5e](https://github.com/jobtrek/sw/commit/a809c5e70306ad4fd47def9dd0730e671f7c6312))
+* **deps:** bump rust in the docker-minor group ([#84](https://github.com/jobtrek/sw/issues/84)) ([0d68dee](https://github.com/jobtrek/sw/commit/0d68deee3fd584c7e84109774b8704845f3ad8cf))
+* **deps:** bump rust in the docker-minor group ([#97](https://github.com/jobtrek/sw/issues/97)) ([978b779](https://github.com/jobtrek/sw/commit/978b779bfb22f2622ceebe96ead69ddb695aa57c))
+* **deps:** bump serde from 1.0.203 to 1.0.204 ([#27](https://github.com/jobtrek/sw/issues/27)) ([9da3f13](https://github.com/jobtrek/sw/commit/9da3f1319a08f6e175d5d0d67a288e8481c408d0))
+* **deps:** bump serde from 1.0.204 to 1.0.206 ([#43](https://github.com/jobtrek/sw/issues/43)) ([311f920](https://github.com/jobtrek/sw/commit/311f9203eaf4786b75f4a4f4f4a76327cd0ae2a2))
+* **deps:** bump serde from 1.0.206 to 1.0.208 ([#49](https://github.com/jobtrek/sw/issues/49)) ([53f16fc](https://github.com/jobtrek/sw/commit/53f16fcf3f92d41a21352f7bc4879743155530ea))
+* **deps:** bump serde from 1.0.208 to 1.0.209 ([#52](https://github.com/jobtrek/sw/issues/52)) ([2680c42](https://github.com/jobtrek/sw/commit/2680c420485614367cb6f89dd98d16ddd59fb4c2))
+* **deps:** bump serde from 1.0.209 to 1.0.210 ([#57](https://github.com/jobtrek/sw/issues/57)) ([fa52731](https://github.com/jobtrek/sw/commit/fa527316165756ebbfa0da4315814acf7e122da6))
+* **deps:** bump serde from 1.0.210 to 1.0.213 ([#67](https://github.com/jobtrek/sw/issues/67)) ([817b6e0](https://github.com/jobtrek/sw/commit/817b6e0604086d186fa48b0795fa4e03d47a21d6))
+* **deps:** bump serde from 1.0.213 to 1.0.214 ([#69](https://github.com/jobtrek/sw/issues/69)) ([847e8a0](https://github.com/jobtrek/sw/commit/847e8a0f00483a277f2a771f63aae4201afab26b))
+* **deps:** bump serde from 1.0.214 to 1.0.215 ([#71](https://github.com/jobtrek/sw/issues/71)) ([0f464e0](https://github.com/jobtrek/sw/commit/0f464e082ee196685c3e703fca1802eb7596dc7d))
+* **deps:** bump serde from 1.0.215 to 1.0.216 ([#77](https://github.com/jobtrek/sw/issues/77)) ([fa1a85c](https://github.com/jobtrek/sw/commit/fa1a85c2662a9c1b9177d3c99e687bdf4e0cc89c))
+* **deps:** bump serde from 1.0.216 to 1.0.217 ([#80](https://github.com/jobtrek/sw/issues/80)) ([a44036e](https://github.com/jobtrek/sw/commit/a44036e78a1e4bd5814e4818ad240168d1aff0f8))
+* **deps:** bump serde from 1.0.217 to 1.0.218 ([#96](https://github.com/jobtrek/sw/issues/96)) ([b7296b8](https://github.com/jobtrek/sw/commit/b7296b8bbaa416f82f4658e5e5a3326e930aefef))
+* **deps:** bump serde from 1.0.218 to 1.0.219 ([#102](https://github.com/jobtrek/sw/issues/102)) ([00ba384](https://github.com/jobtrek/sw/commit/00ba38491591bcc713cacd44cdf1f4b9fea6ce20))
+* **deps:** bump serde_json from 1.0.117 to 1.0.119 ([#19](https://github.com/jobtrek/sw/issues/19)) ([7ba4e86](https://github.com/jobtrek/sw/commit/7ba4e8670e341b2d53d8cfd8e37de53afc019539))
+* **deps:** bump serde_json from 1.0.119 to 1.0.120 ([#26](https://github.com/jobtrek/sw/issues/26)) ([eab724c](https://github.com/jobtrek/sw/commit/eab724cc6a10f8aeb8359c56fd05a087d89b8dc8))
+* **deps:** bump serde_json from 1.0.120 to 1.0.122 ([#40](https://github.com/jobtrek/sw/issues/40)) ([34cb1cc](https://github.com/jobtrek/sw/commit/34cb1cc3b1f95a01e9d050c03a7f9b0618fcb8ab))
+* **deps:** bump serde_json from 1.0.122 to 1.0.124 ([#46](https://github.com/jobtrek/sw/issues/46)) ([90f82a5](https://github.com/jobtrek/sw/commit/90f82a5e1dbfca6db78e46f210da884ce8a60d9a))
+* **deps:** bump serde_json from 1.0.124 to 1.0.125 ([#48](https://github.com/jobtrek/sw/issues/48)) ([42a8d51](https://github.com/jobtrek/sw/commit/42a8d51bc27ce3fcfe4a6976bd3e1dd48476c1e2))
+* **deps:** bump serde_json from 1.0.125 to 1.0.127 ([#53](https://github.com/jobtrek/sw/issues/53)) ([c3a5753](https://github.com/jobtrek/sw/commit/c3a57530f35e0f2591c4f96d8c0e3949a301bb1b))
+* **deps:** bump serde_json from 1.0.127 to 1.0.128 ([#56](https://github.com/jobtrek/sw/issues/56)) ([c5ea8b5](https://github.com/jobtrek/sw/commit/c5ea8b544e2a5899dda356981983d220f0c93bc4))
+* **deps:** bump serde_json from 1.0.128 to 1.0.132 ([#64](https://github.com/jobtrek/sw/issues/64)) ([9f37361](https://github.com/jobtrek/sw/commit/9f373615f8c3019e74df0d1f1237bbca8f6e91ca))
+* **deps:** bump serde_json from 1.0.132 to 1.0.133 ([#70](https://github.com/jobtrek/sw/issues/70)) ([4788301](https://github.com/jobtrek/sw/commit/4788301ac854b291364a8abb25910e27c5fd94bd))
+* **deps:** bump serde_json from 1.0.133 to 1.0.134 ([#79](https://github.com/jobtrek/sw/issues/79)) ([d67c737](https://github.com/jobtrek/sw/commit/d67c7379799d2632f5efc3247128894146b2c7ff))
+* **deps:** bump serde_json from 1.0.134 to 1.0.135 ([#83](https://github.com/jobtrek/sw/issues/83)) ([cf97044](https://github.com/jobtrek/sw/commit/cf970448d3e281cf76e0048ba251e479f0053ea7))
+* **deps:** bump serde_json from 1.0.135 to 1.0.138 ([#88](https://github.com/jobtrek/sw/issues/88)) ([26d3876](https://github.com/jobtrek/sw/commit/26d3876c92ee9022f0abe021f6dcbd6a91423e01))
+* **deps:** bump serde_json from 1.0.138 to 1.0.139 ([#95](https://github.com/jobtrek/sw/issues/95)) ([ce685b7](https://github.com/jobtrek/sw/commit/ce685b7656ef7d3e8f2b03e320e1ef77b299ccc1))
+* **deps:** bump serde_json from 1.0.139 to 1.0.140 ([#100](https://github.com/jobtrek/sw/issues/100)) ([6ff67b4](https://github.com/jobtrek/sw/commit/6ff67b412e93fabbe286c2afec3fb1b857e2923c))
+* **deps:** bump the docker-minor group with 2 updates ([#75](https://github.com/jobtrek/sw/issues/75)) ([1549224](https://github.com/jobtrek/sw/commit/1549224f9c4f3aaaa608c4369bf5952acdbb4cbb))
+* **main:** release 0.1.1 ([#4](https://github.com/jobtrek/sw/issues/4)) ([787d3d2](https://github.com/jobtrek/sw/commit/787d3d28393da5699318a9308204403767aea560))
+* **main:** release 0.1.2 ([#6](https://github.com/jobtrek/sw/issues/6)) ([5e7353a](https://github.com/jobtrek/sw/commit/5e7353ae73cf6cfbdfcc624127f01f2bde3c9b29))
+* **main:** release 0.1.3 ([#14](https://github.com/jobtrek/sw/issues/14)) ([96d5906](https://github.com/jobtrek/sw/commit/96d59064eeaf15cf356d5301144d9d6643cd2859))
+* **main:** release 0.1.4 ([#16](https://github.com/jobtrek/sw/issues/16)) ([cd5453f](https://github.com/jobtrek/sw/commit/cd5453faadf1e2475988144fdf4b15c8c2b3b4e4))
+* **main:** release 0.1.5 ([#23](https://github.com/jobtrek/sw/issues/23)) ([b28c938](https://github.com/jobtrek/sw/commit/b28c93821389526170e48dfe52d0f7c6c8d886df))
+* **main:** release 0.2.0 ([#28](https://github.com/jobtrek/sw/issues/28)) ([3ed4a6e](https://github.com/jobtrek/sw/commit/3ed4a6eb690ceb0cc085457828180f7fd41fe9a9))
+* **main:** release 0.2.1 ([#45](https://github.com/jobtrek/sw/issues/45)) ([029a103](https://github.com/jobtrek/sw/commit/029a103a60588661bcad8b8fe1c1fad369adc995))
+* **main:** release 0.2.2 ([#51](https://github.com/jobtrek/sw/issues/51)) ([e17c0a9](https://github.com/jobtrek/sw/commit/e17c0a95bd04eb0f123ebe43559ce4f0080fe2d0))
+* **main:** release 0.2.3 ([#54](https://github.com/jobtrek/sw/issues/54)) ([5f9f9d3](https://github.com/jobtrek/sw/commit/5f9f9d3b53c7ef7fcd46d27f551c335cfd35cc07))
+* **main:** release 0.2.4 ([#59](https://github.com/jobtrek/sw/issues/59)) ([1229392](https://github.com/jobtrek/sw/commit/1229392eec0cf27b4d949b4dcc8c691dc07a34cb))
+* **main:** release 0.2.5 ([#61](https://github.com/jobtrek/sw/issues/61)) ([54d9565](https://github.com/jobtrek/sw/commit/54d9565bf877e4d84af149cd7b23b7c0a0968c06))
+* **main:** release 0.2.6 ([#66](https://github.com/jobtrek/sw/issues/66)) ([2d35b12](https://github.com/jobtrek/sw/commit/2d35b12d19021dc09766db81f5da1a43d7ad93da))
+* **main:** release 0.2.7 ([#68](https://github.com/jobtrek/sw/issues/68)) ([78ea3ba](https://github.com/jobtrek/sw/commit/78ea3ba22d11c942803ed6cfce903636eb137374))
+* **main:** release 0.3.0 ([#74](https://github.com/jobtrek/sw/issues/74)) ([02c4f07](https://github.com/jobtrek/sw/commit/02c4f078bd12246fa696d8617274847b396c8e28))
+* **main:** release 0.3.1 ([#78](https://github.com/jobtrek/sw/issues/78)) ([0f67bbe](https://github.com/jobtrek/sw/commit/0f67bbe0b7c20110ea60671225c2aa4c51906de3))
+* **main:** release 0.3.2 ([#81](https://github.com/jobtrek/sw/issues/81)) ([0cc9b5d](https://github.com/jobtrek/sw/commit/0cc9b5d2e6c41cd32c002b7e9c65ef3ea2057835))
+* **main:** release 0.3.3 ([#85](https://github.com/jobtrek/sw/issues/85)) ([e7fdced](https://github.com/jobtrek/sw/commit/e7fdced30987c2862c971340a060981dc249962e))
+* **main:** release 0.3.4 ([#89](https://github.com/jobtrek/sw/issues/89)) ([42908cc](https://github.com/jobtrek/sw/commit/42908cc46c1ad519c6c36af8dbf2471b533a55b1))
+* **main:** release 0.3.5 ([#91](https://github.com/jobtrek/sw/issues/91)) ([66bc896](https://github.com/jobtrek/sw/commit/66bc896e9540df717995b3333c169de140f53196))
+* **main:** release 0.3.6 ([#93](https://github.com/jobtrek/sw/issues/93)) ([163f654](https://github.com/jobtrek/sw/commit/163f6549014511e8153aaae6145d0dbaaf830f54))
+* **main:** release 0.3.7 ([#98](https://github.com/jobtrek/sw/issues/98)) ([2e32a60](https://github.com/jobtrek/sw/commit/2e32a60a015abe5a0d0fe3d7a6fa9c78209fe56e))
+* **main:** release 0.3.8 ([#101](https://github.com/jobtrek/sw/issues/101)) ([cac89e9](https://github.com/jobtrek/sw/commit/cac89e922873d81edc7c57cf5555344bce17890a))
+* **main:** release 0.4.0 ([#103](https://github.com/jobtrek/sw/issues/103)) ([3e553f3](https://github.com/jobtrek/sw/commit/3e553f31d61543e5f19ac58b38029eb45172e943))
+* **main:** release 0.4.1 ([#107](https://github.com/jobtrek/sw/issues/107)) ([293c196](https://github.com/jobtrek/sw/commit/293c1968d2264974c4854be067f3d0c7bdb61b18))
+* **main:** release 0.4.2 ([#111](https://github.com/jobtrek/sw/issues/111)) ([db5c1e5](https://github.com/jobtrek/sw/commit/db5c1e594c5bd13f6eb853d262fa6e3b6929e10d))
+* **main:** release 0.4.3 ([#113](https://github.com/jobtrek/sw/issues/113)) ([9b52721](https://github.com/jobtrek/sw/commit/9b527216c4f145f9a8cbc0dae87512d6557bb622))
+* **main:** release 0.4.4 ([#116](https://github.com/jobtrek/sw/issues/116)) ([6e23550](https://github.com/jobtrek/sw/commit/6e235509cec786735c5ead81ac03f9b6d94050d3))
+* **main:** release 0.4.5 ([#119](https://github.com/jobtrek/sw/issues/119)) ([80dccd3](https://github.com/jobtrek/sw/commit/80dccd3a73bd7506056c2f68a6c9ec54ed352546))
+* **main:** release 0.4.6 ([#121](https://github.com/jobtrek/sw/issues/121)) ([95228b6](https://github.com/jobtrek/sw/commit/95228b67cc8d4c0ac54ec58716ac97d07052ecb9))
+* **main:** release 0.4.7 ([#124](https://github.com/jobtrek/sw/issues/124)) ([d77550e](https://github.com/jobtrek/sw/commit/d77550ef75b5a406b5a4bb8790282a67a7f315d4))
+* **main:** release 0.4.8 ([#126](https://github.com/jobtrek/sw/issues/126)) ([ee36864](https://github.com/jobtrek/sw/commit/ee36864a3d42a6b632c69e06fe67ab506783bea8))
+* **main:** release 0.4.9 ([#128](https://github.com/jobtrek/sw/issues/128)) ([1ce4ca3](https://github.com/jobtrek/sw/commit/1ce4ca3a13f1b375382e1919cfc3def9c3c21466))
+* release 0.4.10 ([b9f9af9](https://github.com/jobtrek/sw/commit/b9f9af902e0e1476fd8b4f5b8191a93380dc97fb))
+* remove prerelease from release please config ([#34](https://github.com/jobtrek/sw/issues/34)) ([6205fd8](https://github.com/jobtrek/sw/commit/6205fd878a6807186f2b1172d3da2482430abc35))
+* rm unused deps ([#110](https://github.com/jobtrek/sw/issues/110)) ([8611691](https://github.com/jobtrek/sw/commit/8611691e44863bea999488164fa27478c65c790a))
+* setup codeowners ([#5](https://github.com/jobtrek/sw/issues/5)) ([3df853c](https://github.com/jobtrek/sw/commit/3df853c37d70662dda2df5567f1270d386b0e8c3))
+* update to rust 1.87 and deps bump minors ([#120](https://github.com/jobtrek/sw/issues/120)) ([8300860](https://github.com/jobtrek/sw/commit/830086073da45ebab5012489e5be2ac517878ec9))
+
+
+### Documentation
+
+* fix rust extension file ([#7](https://github.com/jobtrek/sw/issues/7)) ([838e182](https://github.com/jobtrek/sw/commit/838e182fde84e47679c8d276ca7956a0b24bb018))
+* initial readme ([8e9da77](https://github.com/jobtrek/sw/commit/8e9da77c1fd3296ef2d19789125c017679cf9995))
+* sw defaults description ([3cf6c8d](https://github.com/jobtrek/sw/commit/3cf6c8d5db5ba38ea961ce5780ed217387faebd1))
+* sw defaults description ([0b75e6b](https://github.com/jobtrek/sw/commit/0b75e6b6e59ca1341036463a988ca4e9500474b8))
+
+
+### Refactors
+
+* addapt check_paths_exist function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* addapt get_files_per_extension function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* addapt get_removable_parts function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* addapt remove_parts function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* addapt run_command function to return error instead of panicking ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* make all structure field snake_case ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* move project to /etc/jobtrek/sw ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* move test and expected result in same folder ([63b2457](https://github.com/jobtrek/sw/commit/63b24575cea23b3f6d9718368867ee050096534c))
+* run cargo fmt and cargo clippy ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+* update ast grep parse error to be a more precise type ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* use an enum to recognize extensions instead of testing it in main() ([#21](https://github.com/jobtrek/sw/issues/21)) ([8ad79eb](https://github.com/jobtrek/sw/commit/8ad79eb68b0245879c5ffc7176855883f8d418a8))
+* use rayon for parallel file wipe ([7ccc70c](https://github.com/jobtrek/sw/commit/7ccc70c010d0ef01165c71fa6814c3ffde99835a))
+* use Result to handle errors instead of panic, unwrap, expect and exit ([#35](https://github.com/jobtrek/sw/issues/35)) ([b6e7bfc](https://github.com/jobtrek/sw/commit/b6e7bfc77ef16749f8f397f90421245d497f1441))
+* use structstruck to nest structures to look like the json ([9fbb77d](https://github.com/jobtrek/sw/commit/9fbb77dc754b058cda3d7ab052ca9fc3d3076fcd))
+
+
+### Build System
+
+* remove ast-grep in dockerfile ([7ccc70c](https://github.com/jobtrek/sw/commit/7ccc70c010d0ef01165c71fa6814c3ffde99835a))
+
+
+### Continuous Integration
+
+* add clippy verification tu action ([b2fc4dc](https://github.com/jobtrek/sw/commit/b2fc4dc62df7f0701b2d551b2d8969905cb5c873))
+* add concurrency group to avoid concurrent running ([#11](https://github.com/jobtrek/sw/issues/11)) ([21ff0d3](https://github.com/jobtrek/sw/commit/21ff0d3d864809fe3822a10c1e85c64dc70bacdc))
+* add docker to dependabot ([#44](https://github.com/jobtrek/sw/issues/44)) ([5b6c5df](https://github.com/jobtrek/sw/commit/5b6c5dfb973029206a7e4a83a39d0e3d8b3cfc36))
+* add release please ([#3](https://github.com/jobtrek/sw/issues/3)) ([a4222ff](https://github.com/jobtrek/sw/commit/a4222fff6017e55c5056f68aeb72b3b7827c828e))
+* add release please configuration files ([a4222ff](https://github.com/jobtrek/sw/commit/a4222fff6017e55c5056f68aeb72b3b7827c828e))
+* add release please releaser action ([a4222ff](https://github.com/jobtrek/sw/commit/a4222fff6017e55c5056f68aeb72b3b7827c828e))
+* setup ci action ([#2](https://github.com/jobtrek/sw/issues/2)) ([b2fc4dc](https://github.com/jobtrek/sw/commit/b2fc4dc62df7f0701b2d551b2d8969905cb5c873))
+* setup dependabot ([#9](https://github.com/jobtrek/sw/issues/9)) ([225f515](https://github.com/jobtrek/sw/commit/225f5150b393334a25e15ba1e2d6d7fad3ea8524))
+* setup formatter and test check workflow ([b2fc4dc](https://github.com/jobtrek/sw/commit/b2fc4dc62df7f0701b2d551b2d8969905cb5c873))
+
 ## [0.4.9](https://github.com/jobtrek/sw/compare/v0.4.8...v0.4.9) (2025-07-03)
 
 
