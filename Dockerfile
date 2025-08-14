@@ -1,4 +1,4 @@
-FROM rust:1.88-alpine
+FROM rust:1.89-alpine
 WORKDIR /etc/jobtrek/sw
 
 # Install the dependencies
