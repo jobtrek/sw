@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.12](https://github.com/jobtrek/sw/compare/v0.4.11...v0.4.12) (2025-08-15)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap from 4.5.42 to 4.5.43 ([#135](https://github.com/jobtrek/sw/issues/135)) ([73ff4e3](https://github.com/jobtrek/sw/commit/73ff4e38a0bf11b874bbc87fba4df4717d206a54))
+* **deps:** bump rust in the docker-minor group ([#134](https://github.com/jobtrek/sw/issues/134)) ([66e1e5a](https://github.com/jobtrek/sw/commit/66e1e5a6ca4cfe251b313bfcb355b956883ff99d))
+
 ## [0.4.11](https://github.com/jobtrek/sw/compare/v0.4.10...v0.4.11) (2025-08-05)
 
 
