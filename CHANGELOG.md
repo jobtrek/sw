@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.12](https://github.com/jobtrek/sw/compare/v0.4.11...v0.4.12) (2025-08-26)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump actions/checkout from 4 to 5 ([#137](https://github.com/jobtrek/sw/issues/137)) ([574b253](https://github.com/jobtrek/sw/commit/574b2536c0fac6539b99b9fd5ebfc05a0bece977))
+* **deps:** bump clap from 4.5.42 to 4.5.43 ([#135](https://github.com/jobtrek/sw/issues/135)) ([73ff4e3](https://github.com/jobtrek/sw/commit/73ff4e38a0bf11b874bbc87fba4df4717d206a54))
+* **deps:** bump clap from 4.5.43 to 4.5.45 ([#140](https://github.com/jobtrek/sw/issues/140)) ([63876ff](https://github.com/jobtrek/sw/commit/63876ffc3464cf0a3cc898b4dccb37b57e3e4b59))
+* **deps:** bump rayon from 1.10.0 to 1.11.0 ([#139](https://github.com/jobtrek/sw/issues/139)) ([60d38d9](https://github.com/jobtrek/sw/commit/60d38d9dc03ed04dec19089bf8fbbda8daaae418))
+* **deps:** bump rust in the docker-minor group ([#134](https://github.com/jobtrek/sw/issues/134)) ([66e1e5a](https://github.com/jobtrek/sw/commit/66e1e5a6ca4cfe251b313bfcb355b956883ff99d))
+* **deps:** bump serde_json from 1.0.142 to 1.0.143 ([#138](https://github.com/jobtrek/sw/issues/138)) ([b335827](https://github.com/jobtrek/sw/commit/b33582745670c10c58e48856de629b11631c029b))
+
 ## [0.4.11](https://github.com/jobtrek/sw/compare/v0.4.10...v0.4.11) (2025-08-05)
 
 
