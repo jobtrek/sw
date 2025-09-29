@@ -19,7 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - run: rustup update stable && rustup default stable
       - run: cargo fmt --all -- --check --verbose
 
   rust_code_linter:
@@ -27,7 +26,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - run: rustup update stable && rustup default stable
       - run: cargo clippy --all-targets --all-features
 
   rust_code_tests:
