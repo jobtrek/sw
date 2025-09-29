@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.4.16](https://github.com/jobtrek/sw/compare/v0.4.15...v0.4.16) (2025-09-29)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump rust in the docker-minor group ([#149](https://github.com/jobtrek/sw/issues/149)) ([36edc29](https://github.com/jobtrek/sw/commit/36edc29151d12227b8a57b81970e2eaef70f1703))
+* **deps:** bump serde from 1.0.226 to 1.0.228 ([#151](https://github.com/jobtrek/sw/issues/151)) ([073dd0c](https://github.com/jobtrek/sw/commit/073dd0c2fd0b01b7717177dc27c214a4e01abb72))
+
+
+### Continuous Integration
+
+* remove not necessary line for clippy and fmt ([#153](https://github.com/jobtrek/sw/issues/153)) ([8791c8c](https://github.com/jobtrek/sw/commit/8791c8c05b1dde6bfef3cc09a652fb8bed1f6643))
+
 ## [0.4.15](https://github.com/jobtrek/sw/compare/v0.4.14...v0.4.15) (2025-09-23)
 
 
