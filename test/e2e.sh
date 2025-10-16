@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
 cd "$(dirname "$0")/e2e"
 
 if command -v fdfind &> /dev/null; then
@@ -9,14 +10,12 @@ else
 fi
 export FD_CMD
 
-declare -A FAILED_FILES
+declare -A FAILED_FILES=()
 while read -r FILE; do
 	echo "Running $FILE:"
 	# Run the script and print its output with 1 indentation level
-	bash "$FILE" 2>&1 | sed 's/^/\t/'
-	LAST_EXIT_CODE=${PIPESTATUS[0]}
-	if [ $LAST_EXIT_CODE -ne 0 ]; then
-		FAILED_FILES["$FILE"]=$LAST_EXIT_CODE
+	if ! bash "$FILE" 2>&1 | sed 's/^/\t/'; then
+		FAILED_FILES["$FILE"]=${PIPESTATUS[0]}
 	fi
 done < <($FD_CMD -t f -e sh)
 
