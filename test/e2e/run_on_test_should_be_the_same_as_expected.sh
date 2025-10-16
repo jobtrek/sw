@@ -4,7 +4,7 @@ cd "$(dirname "$0")/.."
 
 DIFF_TOOL="${DIFF_TOOL:-diff}"
 
-cargo run test
+cargo run -- test --fd-bin-path "$FD_CMD"
 DIFF="$($DIFF_TOOL test expected)"
 git restore test
 if [ -n "$DIFF" ]; then

@@ -2,7 +2,18 @@
 
 cd "$(dirname "$0")/e2e"
 
-FILES="$(fd -t f -e sh)"
+declare FD_CMD
+case "$(cat /etc/os-release | grep ^ID= | cut -d= -f2)" in
+	"ubuntu")
+		FD_CMD="fdfind"
+		;;
+	*)
+		FD_CMD="fd"
+		;;
+esac
+export FD_CMD
+
+FILES="$($FD_CMD -t f -e sh)"
 declare -A FAILED_FILES
 
 while read -r FILE; do
