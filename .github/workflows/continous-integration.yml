@@ -37,4 +37,4 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y fd-find
       - run: cargo build --verbose
       - run: cargo test --verbose
-      - run: test/e2e.sh
+      - run: bash test/e2e.sh
