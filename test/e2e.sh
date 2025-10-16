@@ -3,10 +3,13 @@
 set -euo pipefail
 cd "$(dirname "$0")/e2e"
 
-if command -v fdfind &> /dev/null; then
+if command -v fd &> /dev/null; then
+	FD_CMD="fd"
+elif command -v fdfind &> /dev/null; then
 	FD_CMD="fdfind"
 else
-	FD_CMD="fd"
+	echo "Error: 'fd' or 'fdfind' not found. Please install fd." >&2
+	exit 1
 fi
 export FD_CMD
 
