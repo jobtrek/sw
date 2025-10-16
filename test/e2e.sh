@@ -14,13 +14,13 @@ fi
 export FD_CMD
 
 declare -A FAILED_FILES=()
-while read -r FILE; do
+while read -r -d '' FILE; do
 	echo "Running $FILE:"
 	# Run the script and print its output with 1 indentation level
 	if ! bash "$FILE" 2>&1 | sed 's/^/\t/'; then
 		FAILED_FILES["$FILE"]=${PIPESTATUS[0]}
 	fi
-done < <($FD_CMD -t f -e sh)
+done < <($FD_CMD -t f -e sh -0)
 
 if [ ${#FAILED_FILES[@]} -eq 0 ]; then
 	echo "All tests passed! ✅"
