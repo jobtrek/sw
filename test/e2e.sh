@@ -2,15 +2,11 @@
 
 cd "$(dirname "$0")/e2e"
 
-declare FD_CMD
-case "$(cat /etc/os-release | grep ^ID= | cut -d= -f2)" in
-	"ubuntu")
-		FD_CMD="fdfind"
-		;;
-	*)
-		FD_CMD="fd"
-		;;
-esac
+if command -v fdfind &> /dev/null; then
+	FD_CMD="fdfind"
+else
+	FD_CMD="fd"
+fi
 export FD_CMD
 
 FILES="$($FD_CMD -t f -e sh)"
