@@ -13,7 +13,6 @@ DIFF_TOOL="${DIFF_TOOL:-diff}"
 
 cargo run -- test --fd-bin-path "$FD_CMD"
 DIFF="$($DIFF_TOOL test expected)"
-cleanup
 if [ -n "$DIFF" ]; then
 	echo "Differences found between test and expected:"
 	echo "$DIFF" | sed 's/^/\t/'
