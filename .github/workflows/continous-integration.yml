@@ -34,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - run: rustup update stable && rustup default stable
-      - run: sudo apt-get update && sudo apt-get install -y fd-find
+      - run: sudo apt-get update && sudo apt-get install -y fd-find git
       - run: cargo build --verbose
       - run: cargo test --verbose
       - run: bash test/e2e.sh

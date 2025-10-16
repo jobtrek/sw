@@ -1,5 +1,6 @@
 #/usr/bin/env bash
 
+set -euo pipefail
 cd "$(dirname "$0")/.."
 
 DIFF_TOOL="${DIFF_TOOL:-diff}"
