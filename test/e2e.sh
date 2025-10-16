@@ -27,9 +27,14 @@ if [ ${#FAILED_FILES[@]} -eq 0 ]; then
 	exit 0
 fi
 
-echo -e "\nSome tests failed:"
+echo ""
+echo -e "Some tests failed: ❌"
+CODE_LENGTH=0
+for CODE in "${FAILED_FILES[@]}"; do
+        (( ${#CODE} > CODE_LENGTH )) && CODE_LENGTH=${#CODE}
+done
 for FILE in "${!FAILED_FILES[@]}"; do
-	echo -e "\t$FILE failed with exit code ${FAILED_FILES[$FILE]} ❌"
+        printf '\t\e[0;31m[%*d]\e[0m - %s\n' "$CODE_LENGTH" "${FAILED_FILES[$FILE]}" "$FILE"
 done
 exit 1
 
