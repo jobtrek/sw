@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-cd "$(dirname "$0")/e2e"
+cd "$(dirname "${BASH_SOURCE[0]}")/e2e"
 
 if command -v fd &> /dev/null; then
 	FD_CMD="fd"
