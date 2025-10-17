@@ -9,7 +9,7 @@ cleanup() {
 
 trap cleanup EXIT
 
-DIFF_TOOL="${DIFF_TOOL:-diff}"
+DIFF_TOOL="${DIFF_TOOL:-diff -r}"
 
 cargo run -- test --fd-bin-path "$FD_CMD"
 if DIFF=$($DIFF_TOOL test expected); then
