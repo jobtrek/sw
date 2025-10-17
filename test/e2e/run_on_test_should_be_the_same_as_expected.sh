@@ -11,7 +11,7 @@ trap cleanup EXIT
 
 DIFF_TOOL="${DIFF_TOOL:-diff -r}"
 
-cargo run -- test --fd-bin-path "$FD_CMD"
+./sw test --fd-bin-path "$FD_CMD"
 if DIFF=$($DIFF_TOOL test expected); then
 	echo "No differences found between test and expected."
 elif [ $? -eq 1 ]; then

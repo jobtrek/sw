@@ -13,6 +13,7 @@ else
 fi
 export FD_CMD
 
+cargo build
 declare -A FAILED_FILES=()
 while read -r -d '' FILE; do
 	echo "Running $FILE:"
