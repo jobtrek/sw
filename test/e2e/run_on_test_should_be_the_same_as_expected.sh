@@ -14,8 +14,11 @@ DIFF_TOOL="${DIFF_TOOL:-diff}"
 cargo run -- test --fd-bin-path "$FD_CMD"
 if DIFF=$($DIFF_TOOL test expected); then
 	echo "No differences found between test and expected."
-else
+elif [ $? -eq 1 ]; then
 	echo "Differences found between test and expected:"
 	echo "$DIFF" | sed 's/^/\t/'
 	exit 1
+else
+	echo "Error occurred while comparing test and expected." >&2
+	exit 2
 fi
