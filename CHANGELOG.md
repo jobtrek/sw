@@ -1,5 +1,58 @@
 # Changelog
 
+## [0.5.0](https://github.com/jobtrek/sw/compare/v0.4.16...v0.5.0) (2025-11-06)
+
+
+### Features
+
+* change message for list of failing tests ([0e1ba00](https://github.com/jobtrek/sw/commit/0e1ba005d557245e52727bebffe7b73125df4189))
+* make scripts work when being sourced ([e9ceb47](https://github.com/jobtrek/sw/commit/e9ceb47aebe59bb73f9f95691ec8248604fc7c9d))
+
+
+### Bug Fixes
+
+* determine fd cmd based on existance of fdfind command ([5c6e7ce](https://github.com/jobtrek/sw/commit/5c6e7ce2889a8b2d60bea17ccf66334c24611bd8))
+* shebang ([5beda07](https://github.com/jobtrek/sw/commit/5beda0743a3e04378706464a80bea0281543b56d))
+
+
+### Tests
+
+* add e2e tests ([55b738b](https://github.com/jobtrek/sw/commit/55b738bfd06dcb946e39fe733a04480b28a25966))
+* add e2e tests ([2c1f1bf](https://github.com/jobtrek/sw/commit/2c1f1bf356c7d69c43c546a4c29e91d72827f09a))
+* check if fd is installed ([12a8ac7](https://github.com/jobtrek/sw/commit/12a8ac76d1722325ee32709787ae218b3d26a0dd))
+* crash if any command fails ([2386d97](https://github.com/jobtrek/sw/commit/2386d97f105df0e91769ee4e41cdd83a71f7eb6c))
+* crash if any command fails ([73e48be](https://github.com/jobtrek/sw/commit/73e48be14f93147ad5ee6e90969833f84cd9e84d))
+* differentiate diff error and diff between folders ([b249855](https://github.com/jobtrek/sw/commit/b24985575088e66453e79029ebe55cd8ecf1df67))
+* don't rebuild program for each e2e test ([c78c7c2](https://github.com/jobtrek/sw/commit/c78c7c21915c72e6dbd32146fc9d7c0d304d4af8))
+* run cleanup even if program crashes ([224e1ec](https://github.com/jobtrek/sw/commit/224e1ec3f31af23bdcab141ce838c12faabf8587))
+
+
+### Performance Improvements
+
+* don't store fd's result in variable ([a333a27](https://github.com/jobtrek/sw/commit/a333a2725a761e1f065f5e01c6d0f3ee44bb044f))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap from 4.5.48 to 4.5.50 ([#156](https://github.com/jobtrek/sw/issues/156)) ([0a38b0f](https://github.com/jobtrek/sw/commit/0a38b0fee031af89a7cc0d3137ca3cb88a2e5381))
+* **deps:** bump clap from 4.5.50 to 4.5.51 ([#158](https://github.com/jobtrek/sw/issues/158)) ([b8ebcd9](https://github.com/jobtrek/sw/commit/b8ebcd92887edfc3ab8fb8f37624ab15fc9bd56d))
+* **deps:** bump rust in the docker-minor group ([#159](https://github.com/jobtrek/sw/issues/159)) ([e247d48](https://github.com/jobtrek/sw/commit/e247d4885fc338cfbd495f7a33826e4e1e8d47aa))
+* recursive diff by default ([a7358ec](https://github.com/jobtrek/sw/commit/a7358ec534945d91c01fb1a0d6bb0cdda01c1d6d))
+* remove useless cleanup call ([1d55061](https://github.com/jobtrek/sw/commit/1d55061379d5cc274537d4d486c2c1a46c9ded1a))
+* use \0 instead of \n between fd and read ([6026f0f](https://github.com/jobtrek/sw/commit/6026f0f70fbb9b198cfdb115a73fbc0e6f3c9907))
+
+
+### Refactors
+
+* call diff tool in if statement ([0346ca3](https://github.com/jobtrek/sw/commit/0346ca36773cb7986fb7b9c7fb498ea91a54240b))
+* don't simlink fdfind = fd ([df8d6dd](https://github.com/jobtrek/sw/commit/df8d6dd29cf2f31894b67714b7f3b2fde8acad1a))
+
+
+### Continuous Integration
+
+* e2e tests in pipeline ([11442be](https://github.com/jobtrek/sw/commit/11442be6818245217ff969472e710729423f8f0f))
+* forces e2e to run with bash ([2201c43](https://github.com/jobtrek/sw/commit/2201c43610b932c0f6195a085e9dbbce62abb3e4))
+
 ## [0.4.16](https://github.com/jobtrek/sw/compare/v0.4.15...v0.4.16) (2025-09-29)
 
 
