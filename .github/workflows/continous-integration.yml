@@ -18,21 +18,21 @@ jobs:
     name: Code formatting with fmt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: cargo fmt --all -- --check --verbose
 
   rust_code_linter:
     name: Code linting with clippy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: cargo clippy --all-targets --all-features
 
   rust_code_tests:
     name: Rust build and test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: rustup update stable && rustup default stable
       - run: sudo apt-get update && sudo apt-get install -y fd-find git
       - run: cargo build --verbose
