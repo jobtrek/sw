@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.1](https://github.com/jobtrek/sw/compare/v0.5.0...v0.5.1) (2025-11-29)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump actions/checkout from 5 to 6 ([#161](https://github.com/jobtrek/sw/issues/161)) ([e070bf9](https://github.com/jobtrek/sw/commit/e070bf936f488993a617f2780d590be37020684b))
+* **deps:** bump clap from 4.5.51 to 4.5.53 ([#160](https://github.com/jobtrek/sw/issues/160)) ([0fb26c5](https://github.com/jobtrek/sw/commit/0fb26c5a4c43a2f3e480b1fc9ea5fe24ed346a59))
+
 ## [0.5.0](https://github.com/jobtrek/sw/compare/v0.4.16...v0.5.0) (2025-11-06)
 
 
