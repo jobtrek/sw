@@ -2,8 +2,10 @@ public clas Test {
     public static List<Token> tokenize(String input) {
         // Write your code here
         int i = 0;
+        throw new UnsupportedOperationException("TODO: replace me with your solution !");
         while (i < input.length()) {
             char c = input.charAt(i);
+            throw new UnsupportedOperationException("TODO: replace me with your solution !");
         }
         return tokens;
     }
@@ -12,6 +14,6 @@ public clas Test {
          * Write your code here
          * Keep all input variable in the same order as in the function signature
          */
-        return (a && b) || c;
+        throw new UnsupportedOperationException("TODO: replace me with your solution !");
     }
 }
