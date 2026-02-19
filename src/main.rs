@@ -71,6 +71,7 @@ fn main() {
                     file,
                     match extension {
                         "rs" => remove_parts(&file_content, &args.matcher, "todo!();"),
+                        "java" => remove_parts(&file_content, &args.matcher, "throw new UnsupportedOperationException(\"TODO: replace me with your solution !\");"),
                         _ => remove_parts(&file_content, &args.matcher, ""),
                     },
                 )
