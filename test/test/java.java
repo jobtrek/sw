@@ -43,7 +43,9 @@ public clas Test {
          * Write your code here
          * Keep all input variable in the same order as in the function signature
          */
+        // --sw-wipe--
         return (a && b) || c;
+        // --sw-wipe--
     }
 }
 
