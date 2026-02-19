@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/jobtrek/sw/compare/v0.5.6...v0.6.0) (2026-02-19)
+
+
+### Features
+
+* **java:** add special replacer to allow java compilation ([#176](https://github.com/jobtrek/sw/issues/176)) ([b09e9d1](https://github.com/jobtrek/sw/commit/b09e9d17aa06151a240ed247b23e0183c2227dcb))
+
+
+### Tests
+
+* **java:** update test for new replacer ([b09e9d1](https://github.com/jobtrek/sw/commit/b09e9d17aa06151a240ed247b23e0183c2227dcb))
+
 ## [0.5.6](https://github.com/jobtrek/sw/compare/v0.5.5...v0.5.6) (2026-02-19)
 
 
