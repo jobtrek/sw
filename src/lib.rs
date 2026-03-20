@@ -1,3 +1,9 @@
+mod languages;
+mod processor;
+
+pub use languages::{wipe_placeholder, LanguageConfig, LANGUAGES};
+pub use processor::{transform, validate_markers, INLINE_MARKER, VANISH_MARKER, WIPE_MARKER};
+
 use std::fmt;
 use std::process::{exit, Command};
 
@@ -8,7 +14,7 @@ pub enum SwError {
     Io(std::io::Error),
     Utf8(std::string::FromUtf8Error),
     PathsDoNotExist(Vec<String>),
-    /// `fd` (or another shelled-out command) exited with a non-zero status.
+    /// `fd` exited with a non-zero status.
     CommandFailed { exit_code: Option<i32>, stderr: String },
     /// One or more files contain an odd number of block markers.
     ValidationFailed(Vec<String>),
@@ -61,35 +67,14 @@ impl From<std::string::FromUtf8Error> for SwError {
     }
 }
 
-// ── Public utilities ──────────────────────────────────────────────────────────
+// ── Utilities ─────────────────────────────────────────────────────────────────
 
 /// Unwrap a `Result<T, SwError>`, printing the error and exiting with code 1 on failure.
-///
-/// Useful for callers that do not want to propagate errors through `?`.
 pub fn unwrap_sw_error<T>(result: Result<T, SwError>) -> T {
     result.unwrap_or_else(|e| {
         eprintln!("{e}");
         exit(1);
     })
-}
-
-/// Run a shell command via `sh -c` and return its stdout as a `String`.
-///
-/// Returns [`SwError::CommandFailed`] if the command exits with a non-zero status.
-///
-/// ```
-/// assert_eq!(sw::run_command("echo test").unwrap(), "test\n");
-/// assert_eq!(sw::run_command("cat src/lib.rs").unwrap(), std::fs::read_to_string("src/lib.rs").unwrap());
-/// ```
-pub fn run_command(command: &str) -> Result<String, SwError> {
-    let output = Command::new("sh").arg("-c").arg(command).output()?;
-    if !output.status.success() {
-        return Err(SwError::CommandFailed {
-            exit_code: output.status.code(),
-            stderr: String::from_utf8_lossy(&output.stderr).into_owned(),
-        });
-    }
-    Ok(String::from_utf8(output.stdout)?)
 }
 
 /// Return `Ok(())` if every path in `paths` exists on disk, or an error listing the missing ones.

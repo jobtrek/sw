@@ -1,4 +1,4 @@
-FROM rust:1.94-alpine
+FROM rust:1.94.0-alpine3.23
 WORKDIR /etc/jobtrek/sw
 
 # Install the dependencies
@@ -17,4 +17,3 @@ FROM alpine:3.23
 COPY --from=0 /etc/jobtrek/sw/target/release/sw /usr/local/bin/sw
 RUN apk add --no-cache fd
 ENTRYPOINT ["sw"]
-

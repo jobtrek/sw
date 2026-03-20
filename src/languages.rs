@@ -4,9 +4,6 @@ pub struct LanguageConfig {
     pub wipe_placeholder: Option<&'static str>,
 }
 
-/// Language configurations.
-///
-/// Keep this list in sync with the `Extension` enum in `main.rs`.
 pub const LANGUAGES: &[LanguageConfig] = &[
     LanguageConfig {
         extension: "rs",
@@ -31,3 +28,20 @@ pub const LANGUAGES: &[LanguageConfig] = &[
         wipe_placeholder: None,
     },
 ];
+
+/// Return the wipe placeholder for `ext`, or `""` if the language has none.
+///
+/// # Panics
+///
+/// Panics if `ext` has no entry in [`LANGUAGES`]. This is a programming error:
+/// the `Extension` enum in `main.rs` is out of sync with this table.
+pub fn wipe_placeholder(ext: &str) -> &'static str {
+    LANGUAGES
+        .iter()
+        .find(|l| l.extension == ext)
+        .unwrap_or_else(|| {
+            panic!("BUG: extension '{ext}' has no entry in LANGUAGES — update languages.rs")
+        })
+        .wipe_placeholder
+        .unwrap_or("")
+}
