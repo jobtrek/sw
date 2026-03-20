@@ -1,11 +1,11 @@
 mod languages;
 mod processor;
 
-pub use languages::{wipe_placeholder, LanguageConfig, LANGUAGES};
+pub use languages::wipe_placeholder;
 pub use processor::{transform, validate_markers, INLINE_MARKER, VANISH_MARKER, WIPE_MARKER};
 
 use std::fmt;
-use std::process::{exit, Command};
+use std::process::Command;
 
 // ── Error type ────────────────────────────────────────────────────────────────
 
@@ -68,14 +68,6 @@ impl From<std::string::FromUtf8Error> for SwError {
 }
 
 // ── Utilities ─────────────────────────────────────────────────────────────────
-
-/// Unwrap a `Result<T, SwError>`, printing the error and exiting with code 1 on failure.
-pub fn unwrap_sw_error<T>(result: Result<T, SwError>) -> T {
-    result.unwrap_or_else(|e| {
-        eprintln!("{e}");
-        exit(1);
-    })
-}
 
 /// Return `Ok(())` if every path in `paths` exists on disk, or an error listing the missing ones.
 ///

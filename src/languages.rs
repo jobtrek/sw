@@ -1,10 +1,10 @@
-pub struct LanguageConfig {
-    pub extension: &'static str,
+pub(crate) struct LanguageConfig {
+    pub(crate) extension: &'static str,
     /// Placeholder inserted after a `--sw-wipe--` block. `None` means no placeholder.
-    pub wipe_placeholder: Option<&'static str>,
+    pub(crate) wipe_placeholder: Option<&'static str>,
 }
 
-pub const LANGUAGES: &[LanguageConfig] = &[
+pub(crate) const LANGUAGES: &[LanguageConfig] = &[
     LanguageConfig {
         extension: "rs",
         wipe_placeholder: Some("todo!();"),

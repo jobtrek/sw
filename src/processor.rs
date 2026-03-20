@@ -116,7 +116,7 @@ fn remove_inline(file_content: &str) -> String {
                     break; // unpaired marker — leave remainder as-is
                 };
                 let end = after + rel + INLINE_MARKER.len();
-                s = format!("{}{}", &s[..start], &s[end..]);
+                s.replace_range(start..end, "");
             }
             s
         })
