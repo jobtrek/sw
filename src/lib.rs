@@ -104,11 +104,11 @@ pub fn check_paths_exist(paths: &[String]) -> Result<(), SwError> {
 /// The `fd_bin_path` parameter overrides the `fd` binary name/path.
 ///
 /// ```
-/// // Pass Some("fdfind") or Some("/path/to/fd") to override the binary name.
-/// let fd_bin_path = None; // uses "fd" from PATH
-/// assert!(sw::get_files_per_extension("src", "rs", fd_bin_path).unwrap().contains(&"src/lib.rs".to_string()));
-/// assert_eq!(sw::get_files_per_extension("src/lib.rs", "rs", fd_bin_path).unwrap(), vec!["src/lib.rs".to_string()]);
-/// assert_eq!(sw::get_files_per_extension("src/lib.rs", "toml", fd_bin_path).unwrap(), Vec::<String>::new());
+/// // Directory scanning (the first branch) is covered by the e2e test suite,
+/// // which handles fd/fdfind discovery. These assertions cover the file-path
+/// // branches, which do not invoke fd and have no external dependencies.
+/// assert_eq!(sw::get_files_per_extension("src/lib.rs", "rs", None).unwrap(), vec!["src/lib.rs".to_string()]);
+/// assert_eq!(sw::get_files_per_extension("src/lib.rs", "toml", None).unwrap(), Vec::<String>::new());
 /// ```
 pub fn get_files_per_extension(
     path: &str,
