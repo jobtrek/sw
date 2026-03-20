@@ -1,4 +1,9 @@
 public clas Test {
+    // Java property
+    // --sw-vanish--
+    final String toto;
+    // --sw-vanish--
+
     public static List<Token> tokenize(String input) {
         // Write your code here
         int i = 0;
@@ -48,4 +53,3 @@ public clas Test {
         // --sw-wipe--
     }
 }
-

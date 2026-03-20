@@ -1,4 +1,6 @@
 public clas Test {
+    // Java property
+
     public static List<Token> tokenize(String input) {
         // Write your code here
         int i = 0;

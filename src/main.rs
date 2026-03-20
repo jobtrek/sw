@@ -1,13 +1,15 @@
 use clap::Parser;
 use rayon::prelude::*;
-use sw::{check_paths_exist, get_files_per_extension, unwrap_sw_error};
+use sw::{
+    check_paths_exist, get_files_per_extension, transform, validate_markers, wipe_placeholder,
+    SwError,
+};
 
-/// structure of the clap arguments
 /// sw [path = "."]
 ///
 /// options:
 /// -e --extensions [extensions = "rs,php,js,ts,java"]
-/// --silent [silent = false]
+/// --dry-run [dry_run = false]
 #[derive(Parser, Debug)]
 struct Args {
     #[clap(default_values = &["."])]
@@ -15,14 +17,15 @@ struct Args {
     #[clap(short, long, value_enum, default_values = &["rs", "php", "js", "ts", "java"])]
     extensions: Vec<Extension>,
     #[clap(long)]
-    silent: bool,
-    #[clap(long)]
     fd_bin_path: Option<String>,
-    #[clap(long, default_value = "--sw-wipe--")]
-    matcher: String,
+    /// Validate marker pairing without modifying any files.
+    #[clap(long)]
+    dry_run: bool,
 }
 
-/// enum to represent all possible extensions
+/// All supported file extensions.
+///
+/// Keep this list in sync with `LANGUAGES` in `languages.rs`.
 #[derive(clap::ValueEnum, Clone, Debug)]
 enum Extension {
     Rs,
@@ -31,8 +34,8 @@ enum Extension {
     Ts,
     Java,
 }
+
 impl Extension {
-    /// return the string representation of the extension
     fn as_str(&self) -> &str {
         match self {
             Self::Rs => "rs",
@@ -44,73 +47,63 @@ impl Extension {
     }
 }
 
-/// main function of the program
-/// get the list of files matching the arguments given by the user
-/// for each of these files, get wich parts are solutions that should be removed
-/// remove these parts from the files
 fn main() {
-    let args = Args::parse();
-    unwrap_sw_error(check_paths_exist(&args.paths));
-
-    for extension in args.extensions {
-        let extension = extension.as_str();
-        for path in args.paths.iter() {
-            let files = unwrap_sw_error(get_files_per_extension(
-                path,
-                extension,
-                args.fd_bin_path.as_deref(),
-            ));
-            files.par_iter().for_each(|file| {
-                if !args.silent {
-                    println!("Replacing in {}", file);
-                }
-
-                let file_content = std::fs::read_to_string(file).expect("Cannot read file");
-
-                std::fs::write(
-                    file,
-                    match extension {
-                        "rs" => remove_parts(&file_content, &args.matcher, "todo!();"),
-                        "java" => remove_parts(&file_content, &args.matcher, "throw new UnsupportedOperationException(\"TODO: replace me with your solution !\");"),
-                        _ => remove_parts(&file_content, &args.matcher, ""),
-                    },
-                )
-                .expect("Cannot write file");
-            });
-        }
+    if let Err(e) = run() {
+        eprintln!("{e}");
+        std::process::exit(1);
     }
 }
 
-/// remove the parts of the file that are defined in the given list of programs
-/// they are removed in reverse order to avoid changing the line numbers of the area that still haven't been removed
-fn remove_parts(file_content: &str, matcher: &str, replace_with: &str) -> String {
-    // convert the content of the file from a string to a vector of strings (one string per line)
-    let file_content = file_content
-        .lines()
-        .map(String::from)
-        .collect::<Vec<String>>();
+fn run() -> Result<(), SwError> {
+    let args = Args::parse();
+    check_paths_exist(&args.paths)?;
 
-    // iterate through all lines in reverse and remove all lines between lines that contains matcher
-    let mut remove = false;
-    let wiped_file: Vec<String> = file_content
-        .iter()
-        .filter_map(|line| {
-            if line.contains(matcher) {
-                remove = !remove;
-                // In the cas there is a replacer, we return it if we are at de end of a removal
-                if !remove && !replace_with.is_empty() {
-                    // Get number of spaces at the beginning of the line
-                    let spaces = line.chars().take_while(|&c| c == ' ').count();
-                    // Return the replacer with the same number of spaces
-                    return Some(format!("{}{}", " ".repeat(spaces), replace_with));
-                }
-                return None;
+    // Phase 1: Collect (file path, wipe placeholder) for every file across all
+    // extensions and search paths. File discovery is sequential; processing is parallel.
+    let mut jobs: Vec<(String, &'static str)> = Vec::new();
+    for extension in &args.extensions {
+        let ext = extension.as_str();
+        let placeholder = wipe_placeholder(ext);
+        for path in &args.paths {
+            let files = get_files_per_extension(path, ext, args.fd_bin_path.as_deref())?;
+            for file in files {
+                jobs.push((file, placeholder));
             }
-            if remove {
-                return None;
-            }
-            Some(line.to_string())
+        }
+    }
+
+    // Phase 2: Read all files in parallel.
+    let jobs_with_content: Vec<(String, String, &'static str)> = jobs
+        .into_par_iter()
+        .map(|(path, placeholder)| {
+            let content = std::fs::read_to_string(&path).map_err(SwError::Io)?;
+            Ok((path, content, placeholder))
         })
+        .collect::<Result<_, SwError>>()?;
+
+    // Phase 3: Validate marker pairing across every file before touching anything.
+    // Fail fast — report all violations and leave all files untouched.
+    let errors: Vec<String> = jobs_with_content
+        .iter()
+        .flat_map(|(path, content, _)| validate_markers(path, content))
         .collect();
-    wiped_file.join("\n")
+    if !errors.is_empty() {
+        return Err(SwError::ValidationFailed(errors));
+    }
+
+    // --dry-run: validation passed, nothing to write.
+    if args.dry_run {
+        return Ok(());
+    }
+
+    // Phase 4: Transform and write only files whose content actually changes.
+    jobs_with_content.into_par_iter().try_for_each(
+        |(path, content, placeholder)| -> Result<(), SwError> {
+            let new_content = transform(&content, placeholder);
+            if new_content != content {
+                std::fs::write(&path, new_content).map_err(SwError::Io)?;
+            }
+            Ok(())
+        },
+    )
 }

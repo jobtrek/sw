@@ -3,17 +3,19 @@ pub fn first2_or_third(first: bool, second: bool, third: bool) -> bool {
      * Add boolean operators between the inputs to make the test pass, keep the parameters in the same order as the function signature
      * Write your logic here
      */
+    // --sw-wipe--
     first && second || third
+    // --sw-wipe--
 }
 
 pub enum Shape {
     Circle {
         // Write your logic here
-        // --sw-wipe--
+        // --sw-vanish--
         center_x: f32,
         center_y: f32,
         radius: f32,
-        // --sw-wipe--
+        // --sw-vanish--
     },
     Rectangle {
         // Write your logic here
@@ -26,10 +28,10 @@ pub enum Shape {
 
 pub struct Token {
     // Write your logic here
-    // --sw-wipe--
+    // --sw-vanish--
     pub token_type: TokenType,
     pub value: String,
-    // --sw-wipe--
+    // --sw-vanish--
 }
 
 /// Greet the person referred to in the `text` parameter.
@@ -41,7 +43,9 @@ pub struct Token {
 /// Write your logic here
 pub fn hello(text: &str) -> String {
     // Write here
+    // --sw-wipe--
     format!("Hello, {}!", text)
+    // --sw-wipe--
 }
 
 pub fn tokenize(input: String) -> Vec<Token> {
