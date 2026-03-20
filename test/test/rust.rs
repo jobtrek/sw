@@ -15,7 +15,7 @@ pub enum Shape {
         center_x: f32,
         center_y: f32,
         radius: f32,
-        // --sw-vansih--
+        // --sw-vanish--
     },
     Rectangle {
         // Write your logic here
@@ -28,10 +28,10 @@ pub enum Shape {
 
 pub struct Token {
     // Write your logic here
-    // --sw-vansih--
+    // --sw-vanish--
     pub token_type: TokenType,
     pub value: String,
-    // --sw-vansih--
+    // --sw-vanish--
 }
 
 /// Greet the person referred to in the `text` parameter.
