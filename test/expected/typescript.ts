@@ -2,14 +2,14 @@
  * @param {number[]} grades An array containing all grades
  * @return {number} average with full precision
  */
-export function computeAverage(grades) {
+export function computeAverage() {
     // Write your code here
     let sum = grades
 
     return sum / grades.length
 }
 
-export function first2OrThird(first, second, third) {
+export function first2OrThird(first: string, second: string, third: number) {
     /*
      * Add boolean operators between the inputs to make the test pass, keep the parameters in the same order as the function signature
      * Write your logic here

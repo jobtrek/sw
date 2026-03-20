@@ -3,13 +3,12 @@ pub fn first2_or_third(first: bool, second: bool, third: bool) -> bool {
      * Add boolean operators between the inputs to make the test pass, keep the parameters in the same order as the function signature
      * Write your logic here
      */
-    first && second || third
+    todo!();
 }
 
 pub enum Shape {
     Circle {
         // Write your logic here
-        todo!();
     },
     Rectangle {
         // Write your logic here
@@ -22,7 +21,6 @@ pub enum Shape {
 
 pub struct Token {
     // Write your logic here
-    todo!();
 }
 
 /// Greet the person referred to in the `text` parameter.
@@ -34,7 +32,7 @@ pub struct Token {
 /// Write your logic here
 pub fn hello(text: &str) -> String {
     // Write here
-    format!("Hello, {}!", text)
+    todo!();
 }
 
 pub fn tokenize(input: String) -> Vec<Token> {

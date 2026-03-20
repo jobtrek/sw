@@ -9,7 +9,7 @@ export function computeAverage(grades) {
     return sum / grades.length
 }
 
-export function first2OrThird(first, second, third) {
+export function first2OrThird(first, second) {
     /*
      * Add boolean operators between the inputs to make the test pass, keep the parameters in the same order as the function signature
      * Write your logic here
