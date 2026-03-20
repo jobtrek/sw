@@ -1,5 +1,47 @@
 # Changelog
 
+## [1.0.0](https://github.com/jobtrek/sw/compare/v0.6.3...v1.0.0) (2026-03-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* add support for --sw-vanish-- and --sw--
+
+### Features
+
+* add support for --sw-vanish-- and --sw-- ([d6b156d](https://github.com/jobtrek/sw/commit/d6b156d977f08fe9cb4a5905cbcf5baea880a78a)), closes [#114](https://github.com/jobtrek/sw/issues/114) [#184](https://github.com/jobtrek/sw/issues/184)
+
+
+### Bug Fixes
+
+* remove fd dependent test ([b0c1610](https://github.com/jobtrek/sw/commit/b0c161083831026064e962cfe59fe10dc85418e0))
+* rust test file ([d5971b7](https://github.com/jobtrek/sw/commit/d5971b7c00d9eef3dff585ff3a7380d026850342))
+* silent errors in rayon, odd files malformed ([aec15ba](https://github.com/jobtrek/sw/commit/aec15baa363087bf1ecab273035dc90e2cdbadce))
+
+
+### Tests
+
+* update base files for js ts and php ([d90fdba](https://github.com/jobtrek/sw/commit/d90fdbafd989c2728a4911e730493c333eed217a))
+* update base files for vanish comments support ([8ca0810](https://github.com/jobtrek/sw/commit/8ca08105498a45d3489fa92cc49195e8bd726dbd))
+* update expected file snapshot ([cb252e0](https://github.com/jobtrek/sw/commit/cb252e0a948d1cdceff77a6b9279167c50d7a9a1))
+
+
+### Miscellaneous Chores
+
+* agents and skills setup ([e0bfd34](https://github.com/jobtrek/sw/commit/e0bfd340cbb5697d90a4b36f54a6fe405e2d572e))
+* release 1.0.0 ([1cbfd05](https://github.com/jobtrek/sw/commit/1cbfd0556721e00951aa94b93678fdbc8f7e58bc))
+
+
+### Documentation
+
+* improve readme with usage examples ([e9b74f1](https://github.com/jobtrek/sw/commit/e9b74f1b5ec5d9b860479b79ec2022b32cef3adc))
+
+
+### Refactors
+
+* reduce public api ([950e3d5](https://github.com/jobtrek/sw/commit/950e3d5c5a46dbcc6328c53b1aacb99a337d94f1))
+* separated logic in processor ([77f48ad](https://github.com/jobtrek/sw/commit/77f48ad7080d410984c55443df99d54332cec195))
+
 ## [0.6.3](https://github.com/jobtrek/sw/compare/v0.6.2...v0.6.3) (2026-03-17)
 
 
