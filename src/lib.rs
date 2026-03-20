@@ -1,59 +1,98 @@
-use std::process::exit;
-use std::process::Command;
+use std::fmt;
+use std::process::{exit, Command};
+
+// ── Error type ────────────────────────────────────────────────────────────────
 
 #[derive(Debug)]
 pub enum SwError {
     Io(std::io::Error),
     Utf8(std::string::FromUtf8Error),
     PathsDoNotExist(Vec<String>),
-    AstGrepParseError(serde_json::Error),
+    /// `fd` (or another shelled-out command) exited with a non-zero status.
+    CommandFailed { exit_code: Option<i32>, stderr: String },
+    /// One or more files contain an odd number of block markers.
+    ValidationFailed(Vec<String>),
 }
+
+impl fmt::Display for SwError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            SwError::Io(e) => write!(f, "I/O error: {e}"),
+            SwError::Utf8(e) => write!(f, "UTF-8 decoding error: {e}"),
+            SwError::PathsDoNotExist(paths) => {
+                write!(f, "The following paths do not exist: {}", paths.join(", "))
+            }
+            SwError::CommandFailed { exit_code, stderr } => {
+                let code = exit_code
+                    .map(|c| c.to_string())
+                    .unwrap_or_else(|| "unknown".to_string());
+                write!(f, "Command failed (exit code {code}): {}", stderr.trim())
+            }
+            SwError::ValidationFailed(messages) => {
+                writeln!(f, "Validation failed:")?;
+                for msg in messages {
+                    writeln!(f, "  {msg}")?;
+                }
+                Ok(())
+            }
+        }
+    }
+}
+
+impl std::error::Error for SwError {
+    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        match self {
+            SwError::Io(e) => Some(e),
+            SwError::Utf8(e) => Some(e),
+            _ => None,
+        }
+    }
+}
+
 impl From<std::io::Error> for SwError {
     fn from(e: std::io::Error) -> Self {
         SwError::Io(e)
     }
 }
+
 impl From<std::string::FromUtf8Error> for SwError {
     fn from(e: std::string::FromUtf8Error) -> Self {
         SwError::Utf8(e)
     }
 }
 
+// ── Public utilities ──────────────────────────────────────────────────────────
+
+/// Unwrap a `Result<T, SwError>`, printing the error and exiting with code 1 on failure.
+///
+/// Useful for callers that do not want to propagate errors through `?`.
 pub fn unwrap_sw_error<T>(result: Result<T, SwError>) -> T {
-    match result {
-        Ok(v) => v,
-        Err(e) => {
-            eprintln!(
-                "{}",
-                match e {
-                    SwError::Io(e) => e.to_string(),
-                    SwError::Utf8(e) => e.to_string(),
-                    SwError::PathsDoNotExist(paths) => {
-                        format!("The following paths do not exist: {}", paths.join(", "))
-                    }
-                    SwError::AstGrepParseError(e) => e.to_string(),
-                }
-            );
-            exit(1);
-        }
-    }
+    result.unwrap_or_else(|e| {
+        eprintln!("{e}");
+        exit(1);
+    })
 }
 
-/// run a bash command and return the output
+/// Run a shell command via `sh -c` and return its stdout as a `String`.
+///
+/// Returns [`SwError::CommandFailed`] if the command exits with a non-zero status.
 ///
 /// ```
 /// assert_eq!(sw::run_command("echo test").unwrap(), "test\n");
 /// assert_eq!(sw::run_command("cat src/lib.rs").unwrap(), std::fs::read_to_string("src/lib.rs").unwrap());
 /// ```
 pub fn run_command(command: &str) -> Result<String, SwError> {
-    Ok(String::from_utf8(
-        Command::new("sh").arg("-c").arg(command).output()?.stdout,
-    )?)
+    let output = Command::new("sh").arg("-c").arg(command).output()?;
+    if !output.status.success() {
+        return Err(SwError::CommandFailed {
+            exit_code: output.status.code(),
+            stderr: String::from_utf8_lossy(&output.stderr).into_owned(),
+        });
+    }
+    Ok(String::from_utf8(output.stdout)?)
 }
 
-/// check if the given paths exist
-/// return an error with the list of the missing paths at the end if one of the paths does not exist
-/// paths can be files or directories
+/// Return `Ok(())` if every path in `paths` exists on disk, or an error listing the missing ones.
 ///
 /// ```
 /// sw::check_paths_exist(&["src/lib.rs".to_string(), "..".to_string()]).unwrap();
@@ -65,23 +104,28 @@ pub fn run_command(command: &str) -> Result<String, SwError> {
 /// sw::check_paths_exist(&["src/lib.rs".to_string(), "not_existing.nothing".to_string()]).unwrap();
 /// ```
 pub fn check_paths_exist(paths: &[String]) -> Result<(), SwError> {
-    let missing_paths = paths
+    let missing: Vec<String> = paths
         .iter()
-        .filter(|&x| !std::path::Path::new(x).exists())
-        .map(|x| x.to_string())
-        .collect::<Vec<String>>();
-    if !missing_paths.is_empty() {
-        return Err(SwError::PathsDoNotExist(missing_paths));
+        .filter(|p| !std::path::Path::new(p.as_str()).exists())
+        .cloned()
+        .collect();
+    if !missing.is_empty() {
+        return Err(SwError::PathsDoNotExist(missing));
     }
     Ok(())
 }
 
-/// get the list of files with the given extension in the given path
-/// if the path is a file with the right extension, return a list with only this file
-/// if the path is a file with the wrong extension, return an empty list
+/// Return the list of files with the given extension reachable from `path`.
+///
+/// - If `path` is a directory, `fd` is used to enumerate files recursively.
+/// - If `path` is a file whose name ends with `.{extension}`, it is returned as-is.
+/// - Otherwise an empty list is returned.
+///
+/// The `fd_bin_path` parameter overrides the `fd` binary name/path.
 ///
 /// ```
-/// let fd_bin_path = Some("fdfind"); // set on None if your bin is called "fd", otherwise set the path to the binary
+/// // Pass Some("fdfind") or Some("/path/to/fd") to override the binary name.
+/// let fd_bin_path = None; // uses "fd" from PATH
 /// assert!(sw::get_files_per_extension("src", "rs", fd_bin_path).unwrap().contains(&"src/lib.rs".to_string()));
 /// assert_eq!(sw::get_files_per_extension("src/lib.rs", "rs", fd_bin_path).unwrap(), vec!["src/lib.rs".to_string()]);
 /// assert_eq!(sw::get_files_per_extension("src/lib.rs", "toml", fd_bin_path).unwrap(), Vec::<String>::new());
@@ -92,18 +136,23 @@ pub fn get_files_per_extension(
     fd_bin_path: Option<&str>,
 ) -> Result<Vec<String>, SwError> {
     if std::fs::metadata(path)?.is_dir() {
-        return Ok(run_command(&format!(
-            "{} . {} -e {} --type f",
-            fd_bin_path.unwrap_or("fd"),
-            path,
-            extension
-        ))?
-        .split('\n')
-        .filter(|&x| !x.is_empty())
-        .map(|x| x.to_string())
-        .collect::<Vec<String>>());
+        // Use Command::args to avoid any shell interpolation of user-supplied values.
+        let output = Command::new(fd_bin_path.unwrap_or("fd"))
+            .args([".", path, "-e", extension, "--type", "f"])
+            .output()?;
+        if !output.status.success() {
+            return Err(SwError::CommandFailed {
+                exit_code: output.status.code(),
+                stderr: String::from_utf8_lossy(&output.stderr).into_owned(),
+            });
+        }
+        return Ok(String::from_utf8(output.stdout)?
+            .split('\n')
+            .filter(|s| !s.is_empty())
+            .map(str::to_string)
+            .collect());
     }
-    if !path.ends_with(format!(".{}", extension).as_str()) {
+    if !path.ends_with(&format!(".{extension}")) {
         return Ok(vec![]);
     }
     Ok(vec![path.to_string()])
