@@ -1,8 +1,19 @@
+mod languages;
+
 use clap::Parser;
+use languages::LANGUAGES;
 use rayon::prelude::*;
 use sw::{check_paths_exist, get_files_per_extension, unwrap_sw_error};
 
-/// structure of the clap arguments
+/// Removes lines between pairs of markers, replacing the block with a language placeholder.
+const WIPE_MARKER: &str = "--sw-wipe--";
+
+/// Removes lines between pairs of markers with no placeholder, even on languages that normally use one.
+const VANISH_MARKER: &str = "--sw-vanish--";
+
+/// Removes content between pairs of markers at character precision (same line only).
+const INLINE_MARKER: &str = "/* --sw-- */";
+
 /// sw [path = "."]
 ///
 /// options:
@@ -18,11 +29,11 @@ struct Args {
     silent: bool,
     #[clap(long)]
     fd_bin_path: Option<String>,
-    #[clap(long, default_value = "--sw-wipe--")]
-    matcher: String,
 }
 
-/// enum to represent all possible extensions
+/// All supported file extensions.
+///
+/// Keep this list in sync with `LANGUAGES` in `languages.rs`.
 #[derive(clap::ValueEnum, Clone, Debug)]
 enum Extension {
     Rs,
@@ -31,8 +42,8 @@ enum Extension {
     Ts,
     Java,
 }
+
 impl Extension {
-    /// return the string representation of the extension
     fn as_str(&self) -> &str {
         match self {
             Self::Rs => "rs",
@@ -44,16 +55,18 @@ impl Extension {
     }
 }
 
-/// main function of the program
-/// get the list of files matching the arguments given by the user
-/// for each of these files, get wich parts are solutions that should be removed
-/// remove these parts from the files
 fn main() {
     let args = Args::parse();
     unwrap_sw_error(check_paths_exist(&args.paths));
 
-    for extension in args.extensions {
+    for extension in &args.extensions {
         let extension = extension.as_str();
+        let placeholder = LANGUAGES
+            .iter()
+            .find(|l| l.extension == extension)
+            .and_then(|l| l.wipe_placeholder)
+            .unwrap_or("");
+
         for path in args.paths.iter() {
             let files = unwrap_sw_error(get_files_per_extension(
                 path,
@@ -65,43 +78,42 @@ fn main() {
                     println!("Replacing in {}", file);
                 }
 
-                let file_content = std::fs::read_to_string(file).expect("Cannot read file");
+                let content = std::fs::read_to_string(file).expect("Cannot read file");
+                let content = if content.contains(WIPE_MARKER) {
+                    remove_parts(&content, WIPE_MARKER, placeholder)
+                } else {
+                    content
+                };
+                let content = if content.contains(VANISH_MARKER) {
+                    remove_parts(&content, VANISH_MARKER, "")
+                } else {
+                    content
+                };
+                let content = if content.contains(INLINE_MARKER) {
+                    remove_inline(&content)
+                } else {
+                    content
+                };
 
-                std::fs::write(
-                    file,
-                    match extension {
-                        "rs" => remove_parts(&file_content, &args.matcher, "todo!();"),
-                        "java" => remove_parts(&file_content, &args.matcher, "throw new UnsupportedOperationException(\"TODO: replace me with your solution !\");"),
-                        _ => remove_parts(&file_content, &args.matcher, ""),
-                    },
-                )
-                .expect("Cannot write file");
+                std::fs::write(file, content).expect("Cannot write file");
             });
         }
     }
 }
 
-/// remove the parts of the file that are defined in the given list of programs
-/// they are removed in reverse order to avoid changing the line numbers of the area that still haven't been removed
+/// Remove lines between pairs of `matcher` markers.
+///
+/// When `replace_with` is non-empty, it is inserted (with matching indentation)
+/// on the closing marker's line instead of being dropped.
 fn remove_parts(file_content: &str, matcher: &str, replace_with: &str) -> String {
-    // convert the content of the file from a string to a vector of strings (one string per line)
-    let file_content = file_content
-        .lines()
-        .map(String::from)
-        .collect::<Vec<String>>();
-
-    // iterate through all lines in reverse and remove all lines between lines that contains matcher
     let mut remove = false;
-    let wiped_file: Vec<String> = file_content
-        .iter()
+    let wiped: Vec<String> = file_content
+        .lines()
         .filter_map(|line| {
             if line.contains(matcher) {
                 remove = !remove;
-                // In the cas there is a replacer, we return it if we are at de end of a removal
                 if !remove && !replace_with.is_empty() {
-                    // Get number of spaces at the beginning of the line
                     let spaces = line.chars().take_while(|&c| c == ' ').count();
-                    // Return the replacer with the same number of spaces
                     return Some(format!("{}{}", " ".repeat(spaces), replace_with));
                 }
                 return None;
@@ -112,5 +124,42 @@ fn remove_parts(file_content: &str, matcher: &str, replace_with: &str) -> String
             Some(line.to_string())
         })
         .collect();
-    wiped_file.join("\n")
+    let mut result = wiped.join("\n");
+    if file_content.ends_with('\n') && !result.ends_with('\n') {
+        result.push('\n');
+    }
+    result
+}
+
+/// Remove character ranges between pairs of `/* --sw-- */` on the same line.
+///
+/// Multiple pairs on the same line are all processed. Unpaired markers are left as-is.
+fn remove_inline(file_content: &str) -> String {
+    let mut result = file_content
+        .lines()
+        .map(|line| {
+            let mut result = line.to_string();
+            loop {
+                match result.find(INLINE_MARKER) {
+                    None => break,
+                    Some(start) => {
+                        let after_first = start + INLINE_MARKER.len();
+                        match result[after_first..].find(INLINE_MARKER) {
+                            None => break, // unpaired marker — leave remainder as-is
+                            Some(rel) => {
+                                let end = after_first + rel + INLINE_MARKER.len();
+                                result = format!("{}{}", &result[..start], &result[end..]);
+                            }
+                        }
+                    }
+                }
+            }
+            result
+        })
+        .collect::<Vec<_>>()
+        .join("\n");
+    if file_content.ends_with('\n') && !result.ends_with('\n') {
+        result.push('\n');
+    }
+    result
 }
