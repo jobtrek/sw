@@ -15,7 +15,10 @@ pub enum SwError {
     Utf8(std::string::FromUtf8Error),
     PathsDoNotExist(Vec<String>),
     /// `fd` exited with a non-zero status.
-    CommandFailed { exit_code: Option<i32>, stderr: String },
+    CommandFailed {
+        exit_code: Option<i32>,
+        stderr: String,
+    },
     /// One or more files contain an odd number of block markers.
     ValidationFailed(Vec<String>),
 }

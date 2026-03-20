@@ -97,13 +97,13 @@ fn run() -> Result<(), SwError> {
     }
 
     // Phase 4: Transform and write only files whose content actually changes.
-    jobs_with_content
-        .into_par_iter()
-        .try_for_each(|(path, content, placeholder)| -> Result<(), SwError> {
+    jobs_with_content.into_par_iter().try_for_each(
+        |(path, content, placeholder)| -> Result<(), SwError> {
             let new_content = transform(&content, placeholder);
             if new_content != content {
                 std::fs::write(&path, new_content).map_err(SwError::Io)?;
             }
             Ok(())
-        })
+        },
+    )
 }

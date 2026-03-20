@@ -82,8 +82,10 @@ fn remove_parts(file_content: &str, marker: &str, replace_with: &str) -> String 
             if line.contains(marker) {
                 removing = !removing;
                 if !removing && !replace_with.is_empty() {
-                    let indent: String =
-                        line.chars().take_while(|&c| c == ' ' || c == '\t').collect();
+                    let indent: String = line
+                        .chars()
+                        .take_while(|&c| c == ' ' || c == '\t')
+                        .collect();
                     return Some(format!("{indent}{replace_with}"));
                 }
                 return None;
