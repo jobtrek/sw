@@ -1,5 +1,6 @@
 <?php
-function count_to(int $num) {
+function count_to(int $num)
+{
     /*
     Write your code here
     */
@@ -10,9 +11,11 @@ function count_to(int $num) {
     // --sw-wipe--
 }
 
-class Lib {
+class Lib
+{
     //Write your code here
-    public static function len($content): int {
+    public static function len(/* --sw-- */ $content /* --sw-- */): int
+    {
         // --sw-wipe--
         if (is_array($content)) {
             return count($content);
@@ -22,4 +25,3 @@ class Lib {
     }
 }
 ?>
-

@@ -2,7 +2,7 @@
  * @param {number[]} grades An array containing all grades
  * @return {number} average with full precision
  */
-export function computeAverage(grades) {
+export function computeAverage(/* --sw-- */grades/* --sw-- */) {
     // Write your code here
     let sum = grades
         // --sw-wipe--
@@ -20,7 +20,7 @@ export function computeAverage(grades) {
     return sum / grades.length
 }
 
-export function first2OrThird(first, second, third) {
+export function first2OrThird(first: string, second: string, third: number) {
     /*
      * Add boolean operators between the inputs to make the test pass, keep the parameters in the same order as the function signature
      * Write your logic here
@@ -29,4 +29,3 @@ export function first2OrThird(first, second, third) {
     return first && second || third
     // --sw-wipe--
 }
-
