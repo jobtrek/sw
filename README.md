@@ -1,6 +1,6 @@
 # SW
 
-**v1.0.0 :** [Read changelog](./CHANGELOG.md) <!-- x-release-please-version -->
+**v1.0.1 :** [Read changelog](./CHANGELOG.md) <!-- x-release-please-version -->
 
 > A solution wiper for programming exercises. Strips solution code from files so students can complete them.
 
