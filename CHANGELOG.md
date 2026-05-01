@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.3](https://github.com/jobtrek/sw/compare/v1.0.2...v1.0.3) (2026-05-01)
+
+
+### Miscellaneous Chores
+
+* dependabot groups ([6ae897f](https://github.com/jobtrek/sw/commit/6ae897f7a898d39270f5ca1ab1a25a746bfe22bd))
+* **deps:** bump googleapis/release-please-action from 4 to 5 ([#192](https://github.com/jobtrek/sw/issues/192)) ([7940b73](https://github.com/jobtrek/sw/commit/7940b73ff1ea2ed2aeaebc8f4295ce2d0c0d9060))
+* **deps:** bump the production-dependencies group with 2 updates ([#196](https://github.com/jobtrek/sw/issues/196)) ([2611e1c](https://github.com/jobtrek/sw/commit/2611e1c432e560cbcb244c68e2ce1b834116592d))
+
 ## [1.0.2](https://github.com/jobtrek/sw/compare/v1.0.1...v1.0.2) (2026-04-21)
 
 
