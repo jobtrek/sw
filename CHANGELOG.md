@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.7](https://github.com/jobtrek/sw/compare/v1.0.6...v1.0.7) (2026-09-01)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump rust in the docker-minor group ([#207](https://github.com/jobtrek/sw/issues/207)) ([647f643](https://github.com/jobtrek/sw/commit/647f643b1f663c67e5ec304446d069ddf983df32))
+
 ## [1.0.6](https://github.com/jobtrek/sw/compare/v1.0.5...v1.0.6) (2026-08-28)
 
 
