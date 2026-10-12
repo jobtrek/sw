@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.8](https://github.com/jobtrek/sw/compare/v1.0.7...v1.0.8) (2026-10-12)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump clap in the production-dependencies group ([#209](https://github.com/jobtrek/sw/issues/209)) ([0bf38a7](https://github.com/jobtrek/sw/commit/0bf38a73e79d53c5dc7438f62eda66c7056c1c40))
+* **deps:** bump rust in the docker-minor group ([#210](https://github.com/jobtrek/sw/issues/210)) ([21f6ee2](https://github.com/jobtrek/sw/commit/21f6ee216f962f529ccfe4c477877b679671cc6d))
+
 ## [1.0.7](https://github.com/jobtrek/sw/compare/v1.0.6...v1.0.7) (2026-09-01)
 
 
