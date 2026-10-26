@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.9](https://github.com/jobtrek/sw/compare/v1.0.8...v1.0.9) (2026-10-26)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump rust ([#212](https://github.com/jobtrek/sw/issues/212)) ([cd45253](https://github.com/jobtrek/sw/commit/cd45253615154bdd4a8edf1afe79d57d87223ee4))
+
 ## [1.0.8](https://github.com/jobtrek/sw/compare/v1.0.7...v1.0.8) (2026-10-12)
 
 
